@@ -1,12 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from 'react-router-dom'; 
+
+import PrivateRoute from './components/Private/PrivateRoute';
+import Admin from './components/Admin/Admin';
+import Home from './components/Home/Home/';
+import Joke from './components/Joke/Joke';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import NavBar from './components/NavBar/NavBar';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <>
+      <NavBar />
+      <Switch>
+        <PrivateRoute path='/admin'>
+          <Admin />
+        </PrivateRoute>
+        <Route path='/home' component={Home} />
+        <Route path='/joke' component={Joke} />
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
+        <Route componen={Home} />
+      </Switch>
+    </>
   );
 }
 
