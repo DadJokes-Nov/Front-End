@@ -10,7 +10,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 //reducers
 
 
-const store = createStore(/*needs reducer here*/ (applyMiddleware(think)));
+const store = createStore(/*needs reducer here*/ (applyMiddleware(thunk)));
 
 
 ReactDOM.render(
