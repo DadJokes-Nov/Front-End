@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -15,6 +16,29 @@ import Typography from '@material-ui/core/Typography';
 //onChange
 
 const useStyles = makeStyles({
+    background:{
+        backgroundColor: '#4183AF',
+        display: 'flex',
+        justifyContent: 'center',
+        height: '100vh',
+        width: '100%'
+    },
+    container:{
+        backgroundColor: 'white',
+        padding: '50px',
+        borderRadius: 25,
+        width: '100%',
+        margin: 50,
+        minHeight: 400,
+        maxWidth: 800,
+        height: 'fit-content',
+        boxShadow: '0 15px 60px 0 #B8D1E2'
+    },
+    title:{
+        fontWeight: 700,
+        color: '#0B3754',
+        fontFamily: 'Roboto, sans-serif'
+    },
     input:{
         border: 5,
         borderRadius: 5,
@@ -46,6 +70,24 @@ const useStyles = makeStyles({
         backgroundColor: "ghostwhite",
         boxShadow: '0 3px 5px 2px #5F685C',
         marginTop: 10
+    },
+    button:{
+        margin: 20,
+        borderRadius: 50,
+        backgroundColor: '#0B3754',
+        color: 'white',
+        fontWeight: 500,
+        letterSpacing: 1,
+        height: 40,
+        width: '100',
+        cursor: 'pointer'
+    },
+    reroute:{
+        paddingTop: 20
+    },
+    loginlink:{
+        color: '#34377F',
+        fontSize: 15
     }
 })
 
@@ -60,10 +102,10 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
   }, [status]);
 
   return (
-   <div className="bigboy"> 
-        <div className="user-form">
-            <h1>Why don't bachelors like Git?</h1>
-            <h2>Are you ready to join our blessed fatherhood?</h2>
+   <div className={classes.background}> 
+        <div className={classes.container}>
+            <h1 className={classes.title}>Why don't bachelors like Git?</h1>
+            <h2 className={classes.title}>Are you ready to join our blessed fellowship of like-minded dads who have the best dang kneeslappers?</h2>
             <Form className="form-cont">
                 <div>
                     <Field 
@@ -100,6 +142,15 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                         placeholder="Create your username." 
                         component={TextField} 
                     />
+                </div>
+                <div>
+                    <Field 
+                        className={classes.image} 
+                        type="url" 
+                        name="profimage" 
+                        placeholder="Image URL for avatar." 
+                        component={TextField}
+                    />
                 </div>  
                 <div>
                     <Field 
@@ -109,35 +160,6 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                         placeholder="Password." 
                         component={TextField}
                     />
-                </div>
-                <div>
-                    <Field className={classes.sel} as="select" name="age">
-                    <option>Please choose an option in the following age ranges.</option>
-                    <option value="dad-in-training">18 and Below (I am jealous of your youth.)</option>
-                    <option value="young-dad">19-29</option>
-                    <option value="established-dad">30-40</option>
-                    <option value="mid-life-crisis-dad">40-55</option>
-                    <option value="hugh-hefner-dad">56-666</option>
-                    </Field>
-                    {touched.age && errors.age && (
-                    <p className="errors">{errors.age}</p>
-                    )}
-                </div>
-                <div>
-                    <Field className={classes.sel} as="select" name="subject">
-                        <option>Choose your subject of interest, Pops.</option>
-                        <option value="sports">Sports</option>
-                        <option value="videogames">Video Games</option>
-                        <option value="philo">Existentialist Quandaries</option>
-                        <option value="pop-cult">Pop Culture</option>
-                        <option value="science">Science</option>
-                        <option value="maths">Mathematics</option>
-                        <option value="coding">Coders/Hackers Unite!</option>
-                        <option value="anime">Anime + 2D Waifus</option>
-                    </Field>
-                    {touched.subject && errors.subject && (
-                    <p className="errors">{errors.subject}</p>
-                    )}
                 </div>
                 <label className="checkbox-container">
                 <span className="robot">I am not a robot; I may however be an AI entity:   </span>
@@ -150,21 +172,18 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                 />
                 <span className="checkmark" />
                 </label>
-                <div>
-                    <Field
-                        className={classes.notes} 
-                        as="textarea" 
-                        type="type" 
-                        name="notes" 
-                        placeholder="Special Notes." 
-                        component={TextField} 
-                    />
-                </div>
                 <div className="butt-cont" type="submit">
-                    <button>Join the fatherhood.</button>
+                    <button className={classes.button}>Join the fatherhood.</button>
                 </div>
             </Form>
-            <h1>Because they don't like to commit.</h1>
+            <h1 className={classes.title}>Because they don't like to commit.</h1>
+            <p className={classes.reroute}>
+                If you don't have an account,{" "}
+                <Link to="/login" className={classes.loginlink}>
+                    {" "}click here to sign in
+                </Link>
+                .
+            </p>
         </div>
         {users.map(user => (
         <Card className={classes.card}>
@@ -174,9 +193,7 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                 <Typography variant="subtitle" component="h3">Email: {user.email}</Typography>
                 <Typography variant="subtitle" component="h3">Password: {user.password}</Typography>
                 <Typography variant="subtitle" component="h3">Username: {user.username}</Typography>
-                <Typography variant="subtitle" component="h4">Age Group: {user.age}</Typography>
                 <Typography variant="subtitle" component="h4">Is not a robot: {user.robotbox ? 'yes' : 'no'}</Typography>
-                <Typography variant="subtitle" component="h4">Special Notes: {user.notes}</Typography>
                 </div>
             </CardContent>
         </Card>
@@ -186,16 +203,13 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
 };
 
 const FormikForm = withFormik({
-  mapPropsToValues({ firstname, lastname, email, username, password, age, subject, robotbox, notes }) {
+  mapPropsToValues({ firstname, lastname, email, username, password, robotbox }) {
     return {
       firstname: firstname || "",
       lastname: lastname || "",
       email: email || "",
       username: username || "",
       password: password || "",
-      age: age || "",
-      subject: subject || "",
-      notes: notes || "",
       robotbox: robotbox || false
     };
   },
@@ -215,9 +229,6 @@ const FormikForm = withFormik({
     password: Yup.string()
         .min(8, "Password must be 8 characters or longer.")
         .required("Enter your password. Do not make me ask again."),
-    notes: Yup.string(),
-    age: Yup.string().required("Choose your age, YOU IMBECILE!"),
-    subject: Yup.string().required("Choose your favorite subject."),
     robotbox: Yup.bool().oneOf([true], "Error. Please check this box to let us know that you are an omniscient being - AI and the inferior human.")
   }),
   handleSubmit(values, { setStatus, resetForm }) {
