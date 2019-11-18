@@ -21,7 +21,7 @@ function App() {
         <Route path='/joke' component={Joke} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
-        <Route componen={Home} />
+        <Route component={Home} />
       </Switch>
     </>
   );
