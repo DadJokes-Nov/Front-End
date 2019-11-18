@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import PrivateRoute from './components/Private/PrivateRoute';
 import Admin from './components/Admin/Admin';
-import Home from './components/Home/Home/';
+import Home from './components/Home/Home';
 import Joke from './components/Joke/Joke';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
