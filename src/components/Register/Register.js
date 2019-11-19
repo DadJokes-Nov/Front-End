@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { axiosInstance } from "../../utils/axiosInstance";
+import axios from 'axios';
 
 import { TextField } from "formik-material-ui";
 import { makeStyles } from "@material-ui/core/styles";
@@ -244,15 +245,15 @@ const FormikForm = withFormik({
     //values is our object with all our data on it
 
     //this is a placeholder until backend creates an api to connect to
-    axiosInstance
-    .post("https://reqres.in/api/users/", values)
-    // make sure to change this end point or else we can't create accounts!
+    console.log('submitting', axios);
+    axios.get('https://dog.ceo/api/breeds/list/all')
       .then(res => {
-        setStatus(res.data);
-        resetForm();
-        props.history.push('/login');
+        console.log(res);
+        // setStatus(res.data);
+        // resetForm();
+        // props.history.push('/login');
       })
-      .catch(error => console.log(error.response));
+    //   .catch(error => console.error(error));
   }
 })(RegisterUserForm);
 
