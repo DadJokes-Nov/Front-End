@@ -245,15 +245,19 @@ const FormikForm = withFormik({
     //values is our object with all our data on it
 
     //this is a placeholder until backend creates an api to connect to
-    console.log('submitting', axios);
-    axios.get('https://dog.ceo/api/breeds/list/all')
+    console.log('submitting');
+    axios.post('http:/localhost:4300/api/users/register', {
+        username: values.username,
+        email: values.email,
+        password: values.password
+    })
       .then(res => {
         console.log(res);
         // setStatus(res.data);
         // resetForm();
         // props.history.push('/login');
       })
-    //   .catch(error => console.error(error));
+      .catch(error => console.log(error.message, error.status, error, error.data));
   }
 })(RegisterUserForm);
 

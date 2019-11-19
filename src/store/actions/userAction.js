@@ -9,9 +9,9 @@ export const loginUser = credentials => dispatch => {
   dispatch({ type: START_LOGIN });
   console.log(credentials);
 
-
+  //need to make sure the URL is correct.
   axios
-    .post('http://localhost:4300/login', credentials)
+    .post('http://localhost:4300/api/login', credentials)
     .then(res => {
       localStorage.setItem('token')
       console.log(res);
