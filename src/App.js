@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom'; 
 import { connect } from 'react-redux';
 
+import './styles/global.scss'
 import PrivateRoute from './components/Private/PrivateRoute';
 import Admin from './components/Admin/Admin';
 import Home from './components/Home/Home';
