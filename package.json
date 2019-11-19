@@ -16,7 +16,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "sass": "^1.23.6",
-    "thunk": "0.0.1",
+    "styled-components": "^4.4.1",
     "yup": "^0.27.0"
   },
   "scripts": {

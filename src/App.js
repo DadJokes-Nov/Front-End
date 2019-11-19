@@ -8,6 +8,10 @@ import Joke from './components/Joke/Joke';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import NavBar from './components/NavBar/NavBar';
+import WelcomePage from './components/Register/WelcomePage';
+import RegisterUserForm from "./components/Register/Register";
+import LoginUserForm from "./components/Login/Login";
+
 
 function App() {
   return (
