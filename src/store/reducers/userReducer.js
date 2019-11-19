@@ -9,7 +9,7 @@ const initState = {
     name: '',
     id: null,
     email: '',
-    image_url: '',//this is where we will put default image
+    img_url: '',//this is where we will put default image
   },
 
   jokes: [

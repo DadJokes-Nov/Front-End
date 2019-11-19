@@ -1,13 +1,15 @@
 
-import React, { useState, useEffect, useHistory } from "react";
-import {Link} from "react-router-dom";
+import React from "react";
+import { connect } from 'react-redux';
+import { Link, useHistory } from "react-router-dom";
+
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 
 import "../Login/Login.scss";
 
 import { makeStyles } from "@material-ui/core/styles";
+import { loginUser } from '../../store/actions/userAction';
 // import { isReferenced } from "@babel/types";
 // import Card from '@material-ui/core/Card';
 // import CardContent from '@material-ui/core/CardContent';
@@ -120,11 +122,16 @@ const useStyles = makeStyles({
 })
 
 
+
 const LoginUserForm = ({ values, errors, touched, isAuthenticating, loggedIn, authenticationError,status }) => {
 
-//   const history = useHistory();  
   const classes = useStyles();
+  const history = useHistory();
 
+  if (loggedIn) {
+      history.push('/');
+  }
+  
   if (isAuthenticating){
       return (
         <div className={classes.processing}>
@@ -132,15 +139,6 @@ const LoginUserForm = ({ values, errors, touched, isAuthenticating, loggedIn, au
         </div>
       );
   }  
-
-//   if (loggedIn){
-//       history.push("/");
-//   }
-
-//   const [users, setUsers] = useState([]);
-//   useEffect(() => {
-//     status && setUsers(users => [...users, status]);
-//   }, [status]);
 
   return (
    <div className={classes.background}> 
@@ -192,6 +190,9 @@ const LoginUserForm = ({ values, errors, touched, isAuthenticating, loggedIn, au
                         <p className={classes.err}>{authenticationError.data}</p>
                     )}
                 </div>
+                {authenticationError && (
+                    <p>{authenticationError}</p>
+                )}
             </Form>
             <h1 className={classes.joke}>A BOOlean.</h1>
             <p className={classes.reroute}>
@@ -221,25 +222,23 @@ const FormikForm = withFormik({
           .min(8, "Password must be 8 characters or longer.")
           .required("Enter the magic word, wizard.")
     }),
-    handleSubmit(values, { setStatus, resetForm , props }) {
-      //values is our object with all our data on it
-      props.loginUser({
-          username: values.username,
-          password: values.password
-      });
 
-      //this is a placeholder until backend creates an api to connect to
-      axios
-        .post("https://reqres.in/api/users/", values)
-        .then(res => {
-          setStatus(res.data);
-          console.log(res);
-          resetForm();
-        })
-        .catch(error => console.log(error.response));
+    handleSubmit(values, { props }) {
+      props.loginUser({
+          email: values.username,
+          password: values.password
+    })
     }
 })(LoginUserForm);
 
+const mapStateToProps = state => {
+    return {
+      isAuthenticating: state.isAuthenticating,
+      loggedIn: state.loggedIn,
+      authenticationError: state.authenticationError
+    };
+  };
+
+export default connect( mapStateToProps, { loginUser })(FormikForm);
 
 
-export default FormikForm;
