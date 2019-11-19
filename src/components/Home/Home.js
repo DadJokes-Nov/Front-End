@@ -1,9 +1,9 @@
 import React from 'react';
-
+import WelcomePage from './WelcomePage';
 const Home = () => {
   return (
     <div>
-      <h1>INSIDE HOME!</h1>
+      <WelcomePage />
     </div>
   );
 };
