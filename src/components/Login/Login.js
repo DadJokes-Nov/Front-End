@@ -123,7 +123,7 @@ const LoginUserForm = ({ values, errors, touched, status }) => {
    <div className={classes.background}> 
         <div className={classes.container}>
             <h1 className={classes.joke}>What do you call a skinny ghost?</h1>
-            <h1 className={classes.title}>Log-In</h1>
+            <h2 className={classes.title}>Log-In</h2>
             <Form className={classes.formcont}>
                 <div className={classes.formwrapper}>
                 <div className={classes.errors}>
