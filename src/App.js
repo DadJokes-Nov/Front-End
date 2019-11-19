@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom'; 
 import { connect } from 'react-redux';
 
@@ -13,10 +13,16 @@ import NavBar from './components/NavBar/NavBar';
 import WelcomePage from './components/Register/WelcomePage';
 import RegisterUserForm from "./components/Register/Register";
 import LoginUserForm from "./components/Login/Login";
+import FormJoke from "./components/Joke/FormJoke";
+import dummyData from "./dummyData";
 
 
 
 function App() {
+  const [jokeList, setTeamList] = useState(dummyData);
+  const addNewJoke = form => {
+    setTeamList([...jokeList, form]);
+  };
   return (
     <>
       <NavBar />
@@ -25,7 +31,7 @@ function App() {
           <Admin />
         </PrivateRoute>
         <Route path='/home' component={Home} />
-        <Route path='/joke' component={Joke} />
+        <Route path='/joke' render={ () =><FormJoke addNewJoke={addNewJoke} />, <Joke joke={jokeList} />} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route component={Home} />

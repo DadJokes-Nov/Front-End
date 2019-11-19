@@ -1,11 +1,18 @@
-import React from 'react';
+import React from "react";
 
-const Joke = () => {
+function Joke(props) {
+  console.log(props, "props");
   return (
     <div>
-      <h1>INSIDE JOKE!</h1>
+      {props.Joke.map(form => {
+        return (
+          <div>
+            <p>{form.addJoke}</p>
+            <p>{form.punchLine}</p>
+          </div>
+        );
+      })}
     </div>
   );
-};
-
+}
 export default Joke;
