@@ -241,5 +241,4 @@ const mapStateToProps = state => {
 
 export default connect( mapStateToProps, { loginUser })(FormikForm);
 
-export default FormikForm;
 
