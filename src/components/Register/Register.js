@@ -306,7 +306,7 @@ const FormikForm = withFormik({
         .required("Please enter the same password again!"),
     robotbox: Yup.bool().oneOf([true], "Error. Please check this box to let us know that you are an omniscient being - AI and the inferior human.")
   }),
-  handleSubmit(values, { setStatus, resetForm }) {
+  handleSubmit(values, { setStatus, setSubmitting, props, resetForm }) {
     //values is our object with all our data on it
 
     //this is a placeholder until backend creates an api to connect to

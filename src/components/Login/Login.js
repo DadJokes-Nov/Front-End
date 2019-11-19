@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useHistory } from "react";
 import {Link} from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -108,18 +108,39 @@ const useStyles = makeStyles({
         color: '#34377F',
         fontSize: 15,
         fontFamily: 'Roboto, sans-serif'
+    },
+    processing:{
+        width: '100%',
+        height: '80vh',
+        color: 'black',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })
 
 
-const LoginUserForm = ({ values, errors, touched, status }) => {
-  const [users, setUsers] = useState([]);
+const LoginUserForm = ({ values, errors, touched, isAuthenticating, loggedIn, authenticationError,status }) => {
 
+//   const history = useHistory();  
   const classes = useStyles();
 
-  useEffect(() => {
-    status && setUsers(users => [...users, status]);
-  }, [status]);
+  if (isAuthenticating){
+      return (
+        <div className={classes.processing}>
+            <i className="fa fa-cookie fa-7x fa-spin"></i>
+        </div>
+      );
+  }  
+
+//   if (loggedIn){
+//       history.push("/");
+//   }
+
+//   const [users, setUsers] = useState([]);
+//   useEffect(() => {
+//     status && setUsers(users => [...users, status]);
+//   }, [status]);
 
   return (
    <div className={classes.background}> 
@@ -167,6 +188,9 @@ const LoginUserForm = ({ values, errors, touched, status }) => {
                     <div className={classes.buttcont}>
                         <button className={classes.button}>Log back in to the fatherhood.</button>
                     </div>
+                    {authenticationError && (
+                        <p className={classes.err}>{authenticationError.data}</p>
+                    )}
                 </div>
             </Form>
             <h1 className={classes.joke}>A BOOlean.</h1>
@@ -197,8 +221,12 @@ const FormikForm = withFormik({
           .min(8, "Password must be 8 characters or longer.")
           .required("Enter the magic word, wizard.")
     }),
-    handleSubmit(values, { setStatus, resetForm }) {
+    handleSubmit(values, { setStatus, resetForm , props }) {
       //values is our object with all our data on it
+      props.loginUser({
+          username: values.username,
+          password: values.password
+      });
 
       //this is a placeholder until backend creates an api to connect to
       axios
@@ -211,5 +239,7 @@ const FormikForm = withFormik({
         .catch(error => console.log(error.response));
     }
 })(LoginUserForm);
+
+
 
 export default FormikForm;
