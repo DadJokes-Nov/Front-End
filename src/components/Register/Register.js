@@ -48,8 +48,12 @@ const useStyles = makeStyles({
         height: 20,
         width: 200,
         padding: '5px 5px',
-        margin: 30,
+        margin: 25,
         fontFamily: 'Inconsolata, monospace'
+    },
+    image:{
+        marginTop: 10,
+        marginBottom: 30
     },
     sel:{
         fontFamily: 'Inconsolata, monospace',
@@ -66,6 +70,7 @@ const useStyles = makeStyles({
     card:{
         minWidth: 400,
         maxWidth: 400,
+        maxHeight: 400,
         fontFamily: 'Inconsolata, monospace',
         backgroundColor: "ghostwhite",
         boxShadow: '0 3px 5px 2px #5F685C',
@@ -145,15 +150,6 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                 </div>
                 <div>
                     <Field 
-                        className={classes.image} 
-                        type="url" 
-                        name="profimage" 
-                        placeholder="Image URL for avatar." 
-                        component={TextField}
-                    />
-                </div>  
-                <div>
-                    <Field 
                         className={classes.input}
                         type="password" 
                         name="password" 
@@ -161,6 +157,15 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                         component={TextField}
                     />
                 </div>
+                <div>
+                    <Field 
+                        className={classes.image} 
+                        type="url" 
+                        name="profimage" 
+                        placeholder="Image URL for avatar." 
+                        component={TextField}
+                    />
+                </div>  
                 <label className="checkbox-container">
                 <span className="robot">I am not a robot; I may however be an AI entity:   </span>
                 <Field
