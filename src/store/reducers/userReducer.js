@@ -1,6 +1,8 @@
-//a user name, id, email, age, image, favorite jokes <-- array, 
-
-//and jokes will be an array of objects with joke: and punchline:  
+import {
+  START_LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE
+} from '../actions/userAction';
 
 const initState = {
   user: {
@@ -37,10 +39,42 @@ const initState = {
       punchline: 'punchline5'
     }
   ],
+
+  isAuthenticating: false,
+  loggedIn: false,
+  authenticationError: '',
+
+
 }
 
 export const userReducer = (state = initState, action) => {
   switch (action.type) {
+    case START_LOGIN:
+      return {
+        ...state, 
+        isAuthenticating: true
+      }
+
+    case LOGIN_SUCCESS: 
+      return {
+        ...state,
+        isAuthenticating: false,
+        loggedIn: true,
+        user: {
+          ...state.user,
+          name: action.payload.name,
+          id: action.payload.id,
+          email: action.payload.email,
+          img_url: action.payload.img_url
+        }
+      }
+
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        authenticationError: action.payload,
+        isAuthenticating: false
+      }
 
     default: 
       return { 
