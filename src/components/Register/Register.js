@@ -8,6 +8,7 @@ import { TextField } from "formik-material-ui";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 //What has been removed since we are utilizing Formik:
@@ -37,7 +38,7 @@ const useStyles = makeStyles({
     title:{
         fontWeight: 700,
         color: '#0B3754',
-        fontFamily: 'Roboto, sans-serif'
+        fontFamily: 'Inconsolata, monospace'
     },
     input:{
         border: 5,
@@ -199,6 +200,7 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                 <Typography variant="subtitle" component="h3">Password: {user.password}</Typography>
                 <Typography variant="subtitle" component="h3">Username: {user.username}</Typography>
                 <Typography variant="subtitle" component="h4">Is not a robot: {user.robotbox ? 'yes' : 'no'}</Typography>
+                <CardMedia className="cardmedia" image={user.image} title="User Avatar" />
                 </div>
             </CardContent>
         </Card>
@@ -208,13 +210,14 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
 };
 
 const FormikForm = withFormik({
-  mapPropsToValues({ firstname, lastname, email, username, password, robotbox }) {
+  mapPropsToValues({ firstname, lastname, email, username, password, image, robotbox }) {
     return {
       firstname: firstname || "",
       lastname: lastname || "",
       email: email || "",
       username: username || "",
       password: password || "",
+      image: image || "",
       robotbox: robotbox || false
     };
   },

@@ -38,7 +38,7 @@ const useStyles = makeStyles({
     title:{
         fontWeight: 700,
         color: '#0B3754',
-        fontFamily: 'Roboto, sans-serif'
+        fontFamily: 'Inconsolata, monospace'
     },
     loginfield:{
         backgroundColor: 'white',
