@@ -5,6 +5,8 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
+import "../Login/Login.scss";
+
 import { makeStyles } from "@material-ui/core/styles";
 // import { isReferenced } from "@babel/types";
 // import Card from '@material-ui/core/Card';
