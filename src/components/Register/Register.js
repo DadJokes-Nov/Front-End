@@ -1,16 +1,16 @@
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
-
+import { axiosInstance } from "../../utils/axiosInstance";
+import axios from 'axios';
 import { TextField } from "formik-material-ui";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+// import Card from '@material-ui/core/Card';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardMedia from '@material-ui/core/CardMedia';
+// import Typography from '@material-ui/core/Typography';
 
 //What has been removed since we are utilizing Formik:
 //state
@@ -100,13 +100,12 @@ const useStyles = makeStyles({
 
 
 const RegisterUserForm = ({ values, errors, touched, status }) => {
-  const [users, setUsers] = useState([]);
+    // const [users, setUsers] = useState([]); possibly unnecessary code
+    const classes = useStyles();
 
-  const classes = useStyles();
-
-  useEffect(() => {
-    status && setUsers(users => [...users, status]);
-  }, [status]);
+    // useEffect(() => { possibly unnecessary code
+    // status && setUsers(users => [...users, status]);
+    // }, [status]);
 
   return (
    <div className={classes.background}> 
@@ -192,7 +191,8 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                 .
             </p>
         </div>
-        {users.map(user => (
+        {/* Not sure what this code is suppose to be doing? vvv */}
+        {/* {users.map(user => (
         <Card className={classes.card}>
             <CardContent>
                 <div key={user.id}>
@@ -205,7 +205,7 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                 </div>
             </CardContent>
         </Card>
-      ))}
+      ))} */}
     </div>  
   );
 };
@@ -240,16 +240,17 @@ const FormikForm = withFormik({
         .required("Enter your password. Do not make me ask again."),
     robotbox: Yup.bool().oneOf([true], "Error. Please check this box to let us know that you are an omniscient being - AI and the inferior human.")
   }),
-  handleSubmit(values, { setStatus, resetForm }) {
+  handleSubmit(values, { setStatus, resetForm, props }) {
     //values is our object with all our data on it
 
     //this is a placeholder until backend creates an api to connect to
-    axios
-      .post("https://reqres.in/api/users/", values)
+    axiosInstance
+    .post("https://reqres.in/api/users/", values)
+    // make sure to change this end point or else we can't create accounts!
       .then(res => {
         setStatus(res.data);
-        console.log(res);
         resetForm();
+        props.history.push('/login');
       })
       .catch(error => console.log(error.response));
   }
