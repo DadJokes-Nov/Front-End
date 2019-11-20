@@ -6,11 +6,11 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 //reducers
+import { userReducer } from './store/reducers/userReducer';
 
-
-const store = createStore(/*needs reducer here*/ (applyMiddleware(thunk)));
+const store = createStore(userReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 
 ReactDOM.render(

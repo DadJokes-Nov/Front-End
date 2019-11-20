@@ -1,21 +1,45 @@
-import React from "react";
-import FormJoke from "./FormJoke";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { getJokes } from '../../store/actions/userAction';
+import JokeCard from './JokeCard';
 
-function Joke(props) {
-  console.log(props, "props");
+const Joke = ({getJokes, jokes}) => {
+  const [random, setRandom] = useState(0)
+
+  useEffect(() => {
+    if (jokes.length === 0) {
+      console.log('getting jokes')
+      getJokes();
+    }
+  }, [getJokes, jokes.length])
+
+  useEffect(() => {
+    const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
+    console.log(randomJoke);
+    setRandom(randomJoke);
+  }, [jokes.length])
+
+  const newJoke = e => {
+    e.preventDefault();
+    const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
+    console.log(randomJoke);
+    setRandom(randomJoke);
+  }
+
   return (
     <div>
-      <FormJoke addNewJoke={props.addNewJoke}/>
-      {props.joke.map(form => {
-
-        return (
-          <div>
-            <p>{form.addJoke}</p>
-            <p>{form.punchLine}</p>
-          </div>
-        );
-      })}
+      {
+        jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} />
+      }
+      <button onClick={newJoke}>New Joke</button>
     </div>
   );
+};
+
+function mapStateToProps(state) {
+  return {
+    jokes: state.jokes
+  }
 }
-export default Joke;
+
+export default connect(mapStateToProps, { getJokes })(Joke);

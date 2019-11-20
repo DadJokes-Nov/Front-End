@@ -1,7 +1,22 @@
 import {
   START_LOGIN,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  BEGIN_GET_JOKE,
+  GET_JOKE_FAILURE,
+  GET_JOKE_SUCCESS,
+  BEGIN_ADD_JOKE,
+  ADD_JOKE_SUCCESS,
+  ADD_JOKE_FAILURE,
+  BEGIN_GET_USER_INFO,
+  GET_USER_INFO_FAILURE,
+  GET_USER_INFO_SUCCESS,
+  BEGIN_DELETE_JOKE,
+  DELETE_JOKE_SUCCESS,
+  DELETE_JOKE_FAILURE,
+  UPDATE_JOKE_SUCCESS,
+  UPDATE_JOKE_FAILURE,
+  BEGIN_UPDATE_JOKE,
 } from '../actions/userAction';
 
 const initState = {
@@ -9,42 +24,18 @@ const initState = {
     name: '',
     id: null,
     email: '',
-    image_url: '',//this is where we will put default image
+    img_url: '',//this is where we will put default image
   },
 
-  jokes: [
-    {
-      id: 0,
-      joke: 'joke1',
-      punchline: 'punchline1'
-    },
-    {
-      id: 1,
-      joke: 'joke2',
-      punchline: 'punchline2'
-    },
-    {
-      id: 2,
-      joke: 'joke3',
-      punchline: 'punchline3'
-    },
-    {
-      id: 3,
-      joke: 'joke4',
-      punchline: 'punchline4'
-    },
-    {
-      id: 4,
-      joke: 'joke5',
-      punchline: 'punchline5'
-    }
-  ],
+  jokes: [],
 
   isAuthenticating: false,
   loggedIn: false,
   authenticationError: '',
 
-
+  isFetchingJokes: false,
+  jokesError: '',
+  userInfoError: ''
 }
 
 export const userReducer = (state = initState, action) => {
@@ -74,6 +65,116 @@ export const userReducer = (state = initState, action) => {
         ...state,
         authenticationError: action.payload,
         isAuthenticating: false
+      }
+
+    case BEGIN_GET_JOKE: 
+      return {
+        ...state,
+        isFetchingJokes: true
+      }
+
+    case GET_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokes: [...action.payload]
+      }
+    
+    case GET_JOKE_FAILURE:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokesError: action.payload
+      }
+
+    case BEGIN_ADD_JOKE:
+      return {
+        ...state,
+        isFetchingJokes: true
+      }
+
+    case ADD_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokes: [...state.jokes, action.payload]
+      }
+
+    case ADD_JOKE_FAILURE:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokesError: action.payload
+      }
+    
+    case BEGIN_UPDATE_JOKE:
+      return {
+        ...state,
+        isFetchingJokes: true
+      }
+
+    case UPDATE_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokes: state.jokes.map(joke => {
+          if (joke.id === action.payload.id) {
+            return action.payload
+          } else {
+            return joke
+          }
+        })
+      }
+
+    case UPDATE_JOKE_FAILURE:
+      return {
+        ...state,
+        isFetchingJokes: false
+      }
+
+    case BEGIN_GET_USER_INFO:
+      return {
+        ...state,
+        isFetchingJokes: true
+      }
+
+    case GET_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        loggedIn: true,
+        user: {
+          name: action.payload.name,
+          id: action.payload.id,
+          email: action.payload.email,
+          img_url: action.payload.img_url
+        }
+      } 
+
+    case GET_USER_INFO_FAILURE:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        userInfoError: action.payload
+      }
+
+    case BEGIN_DELETE_JOKE:
+      return {
+        ...state,
+        isFetchingJokes: true
+      }
+    case DELETE_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokes: state.jokes.filter(joke => joke.id !== action.payload) 
+      }
+
+    case DELETE_JOKE_FAILURE:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        userInfoError: action.payload
       }
 
     default: 
