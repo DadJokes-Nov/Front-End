@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getJokes } from '../../store/actions/userAction';
+import AdminCard from './AdminCard';
 
 const Admin = ({ getJokes, jokes }) => {
   // only want to get jokes if we haven't already!  Maybe we do want to update jokes all the time?  🤔
@@ -16,11 +17,7 @@ const Admin = ({ getJokes, jokes }) => {
       <h1>INSIDE ADMIN!</h1>
       {jokes.map(joke => {
         return (
-          <>
-          {/* Create cards for each joke.  Display all jokes with buttons for remove and edit. */}
-          <h1>{joke.jokes_description}</h1>
-          <h1>{joke.punchline}</h1>
-          </>
+          <AdminCard key={joke.id} joke={joke} />
         )
       })}
     </div>

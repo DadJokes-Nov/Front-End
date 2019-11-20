@@ -1,6 +1,6 @@
 import React from 'react';
 
-const JokeCard = ({joke: {punchline, jokes_description}}) => {
+const AdminCard = ({joke: {id, punchline, jokes_description}}) => {
   return (
     <div>
       <h1>{jokes_description}</h1>
@@ -9,4 +9,4 @@ const JokeCard = ({joke: {punchline, jokes_description}}) => {
   );
 };
 
-export default JokeCard;
+export default AdminCard;
