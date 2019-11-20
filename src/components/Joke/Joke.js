@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getJokes } from '../../store/actions/userAction';
 import JokeCard from './JokeCard';
 
 const Joke = ({getJokes, jokes}) => {
+  const [random, setRandom] = useState(0)
+
   useEffect(() => {
     if (jokes.length === 0) {
       console.log('getting jokes')
@@ -11,14 +13,25 @@ const Joke = ({getJokes, jokes}) => {
     }
   }, [getJokes, jokes.length])
 
+  useEffect(() => {
+    const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
+    console.log(randomJoke);
+    setRandom(randomJoke);
+  }, [jokes.length])
+
+  const newJoke = e => {
+    e.preventDefault();
+    const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
+    console.log(randomJoke);
+    setRandom(randomJoke);
+  }
+
   return (
     <div>
-      <h1>INSIDE JOKE!</h1>
-      {jokes.map(joke => {
-        return (
-          <JokeCard key={joke.id} joke={joke} />
-        )
-      })}
+      {
+        jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} />
+      }
+      <button onClick={newJoke}>New Joke</button>
     </div>
   );
 };
