@@ -6,12 +6,20 @@ import styled from "styled-components";
 
 const Background = styled.div`
   background-color: #A8D0E6;
+  margin: 0 auto;
+`;
+
+const JokeCardDiv = styled.div`
+
 `;
 
 const ButtonDiv = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
-  margin-top: -30%;
+  align-content: center;
+  margin: auto;
+  margin-top: -50%;
 `;
 
 const Button = styled.button`
@@ -51,9 +59,11 @@ const Joke = ({getJokes, jokes}) => {
 
   return (
     <Background>
-      {
-        jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} />
-      }
+      <JokeCardDiv>
+        {
+          jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} />
+        }
+      </JokeCardDiv>
       <ButtonDiv>
         <Button onClick={newJoke}>New Joke</Button>
       </ButtonDiv>

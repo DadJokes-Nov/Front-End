@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 
+const Container = styled.div`
+  background-color: #A8D0E6;
+  height: 100vh;
+`;
+
 const CardDiv = styled.div`
   padding-top: 10%;
   margin: auto;
   background-color: #A8D0E6;
   display: flex;
   justify-content: center;
-  height: 100vh;
+  height: 50vh;
 `;
 
 const CardInnerDiv = styled.div`
@@ -49,15 +54,17 @@ const JokeCard = ({joke: {punchline, jokes_description}}) => {
     setPunch(true);
   }
   return (
-    <CardDiv>
-      <CardInnerDiv>
-        <JokeDesc>{jokes_description}</JokeDesc>
-        {/* we will hide punchline til a button that we build in this component is created. */}
-        <Button onClick={showPunch}>Show Punchline</Button>
-        {punch && <h1>{punchline}</h1>
-        }
-      </CardInnerDiv>
-    </CardDiv>
+    <Container>
+      <CardDiv>
+        <CardInnerDiv>
+          <JokeDesc>{jokes_description}</JokeDesc>
+          {/* we will hide punchline til a button that we build in this component is created. */}
+          <Button onClick={showPunch}>Show Punchline</Button>
+          {punch && <h1>{punchline}</h1>
+          }
+        </CardInnerDiv>
+      </CardDiv>
+    </Container>
   );
 };
 
