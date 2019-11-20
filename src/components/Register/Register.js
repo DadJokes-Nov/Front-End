@@ -7,10 +7,6 @@ import * as Yup from "yup";
 import axios from 'axios';
 
 import { makeStyles } from "@material-ui/core/styles";
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Typography from '@material-ui/core/Typography';
 
 import "../Register/Register.scss";
 
@@ -124,13 +120,9 @@ const useStyles = makeStyles({
 })
 
 
-const RegisterUserForm = ({ values, errors, touched, status }) => {
-    // const [users, setUsers] = useState([]); possibly unnecessary code
-    const classes = useStyles();
+const RegisterUserForm = ({ values, errors, touched }) => {
 
-    // useEffect(() => { possibly unnecessary code
-    // status && setUsers(users => [...users, status]);
-    // }, [status]);
+    const classes = useStyles();
 
   return (
    <div className={classes.background}> 

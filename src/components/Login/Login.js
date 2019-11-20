@@ -1,4 +1,3 @@
-
 import React from "react";
 import { connect } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
@@ -10,10 +9,6 @@ import "../Login/Login.scss";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { loginUser } from '../../store/actions/userAction';
-// import { isReferenced } from "@babel/types";
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     background:{
@@ -219,8 +214,8 @@ const FormikForm = withFormik({
           .min(5, "Your username must be at least 5 characters long.")
           .required("Enter a username, good sir."),
       password: Yup.string()
-          .min(8, "Password must be 8 characters or longer.")
-          .required("Enter the magic word, wizard.")
+        //   .min(8, "Password must be 8 characters or longer.")
+        //   .required("Enter the magic word, wizard.")
     }),
 
     handleSubmit(values, { props }) {
