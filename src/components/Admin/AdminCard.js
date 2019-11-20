@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateJoke, deleteJoke } from '../../store/actions/userAction';
 
 const AdminCard = ({joke: {id, punchline, jokes_description}, updateJoke, deleteJoke}) => {
+  console.log('card', id, punchline, jokes_description);
   const [joke, setJoke] = useState({description: jokes_description, punchline: punchline})
 
   const changeHandler = e => {

@@ -1,4 +1,12 @@
 import axios from 'axios';
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'https://dad-jokes-2019.herokuapp.com'
-export const axiosInstance = axios;
+
+export const axiosInstance = () => {
+  const token = localStorage.getItem('token')
+  console.log(token);
+  return axios.create({
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }
+  })
+}

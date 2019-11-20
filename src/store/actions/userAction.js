@@ -1,5 +1,5 @@
 // import { axiosInstance } from '../../utils/axiosInstance';
-import axiosInstance from 'axios'
+import axios from 'axios';
 
 export const START_LOGIN = 'START_LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -10,7 +10,7 @@ export const loginUser = credentials => dispatch => {
   console.log(credentials);
 
   //need to make sure the URL is correct.
-  axiosInstance
+  axios
     .post('https://dad-jokes-2019.herokuapp.com/api/auth/login', credentials)
     .then(res => {
       localStorage.setItem('token', res.data.token)
@@ -33,7 +33,7 @@ export const GET_JOKE_FAILURE = 'GET_JOKE_FAILURE';
 
 export const getJokes = () => dispatch => {
   dispatch({ type: BEGIN_GET_JOKE });
-  axiosInstance
+  axios
     .get('https://dad-jokes-2019.herokuapp.com/api/jokes')
     .then(res => {
       console.log(res);
@@ -55,8 +55,19 @@ export const ADD_JOKE_FAILURE = 'ADD_JOKE_FAILURE';
 export const addJoke = joke => dispatch => {
   dispatch({ type: BEGIN_ADD_JOKE });
 
-  axiosInstance
-    .post('https://dad-jokes-2019.herokuapp.com/api/auth/jokes', joke)
+  console.log('adding joke', joke);
+  const token = localStorage.getItem('token')
+  axios
+    .post('https://dad-jokes-2019.herokuapp.com/api/auth/jokes', {
+      'punchline': joke.punchline,
+      'jokes_description': joke.description
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    })
     .then(res => {
       console.log(res);
       return dispatch({ type: ADD_JOKE_SUCCESS, payload: res.data })
@@ -78,8 +89,8 @@ export const getUserInfo = id => dispatch => {
   dispatch({ type: BEGIN_GET_USER_INFO });
 
   // needs an endpoint for this!
-  axiosInstance
-    .get(`/users/${id}`)
+  axios
+    .get(`https://dad-jokes-2019.herokuapp.com/users/${id}`)
     .then(res => {
       console.log(res);
       dispatch({ type: GET_USER_INFO_SUCCESS, payload: res.data });
@@ -99,9 +110,18 @@ export const UPDATE_JOKE_FAILURE = 'UPDATE_JOKE_FAILURE';
 
 export const updateJoke = (id, joke) => dispatch => {
   dispatch({ type: BEGIN_UPDATE_JOKE });
-
-  axiosInstance
-  .put(`https://dad-jokes-2019.herokuapp.com/api/auth/jokes/${id}`, joke)
+  const token = localStorage.getItem('token')
+  axios
+  .put(`https://dad-jokes-2019.herokuapp.com/api/auth/jokes/${id}`, {
+    'punchline': joke.punchline,
+    'jokes_description': joke.description
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }
+  })
   .then(res => {
     console.log(res);
     dispatch({ type: UPDATE_JOKE_SUCCESS, payload: res.data })
@@ -122,7 +142,7 @@ export const DELETE_JOKE_FAILURE = 'DELETE_JOKE_FAILURE';
 export const deleteJoke = (id) => dispatch => {
   dispatch({ type: BEGIN_DELETE_JOKE })
 
-  axiosInstance
+  axios
   .delete(`https://dad-jokes-2019.herokuapp.com/api/auth/jokes/${id}`)
   .then(res => {
     console.log(res);
