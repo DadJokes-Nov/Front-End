@@ -2,6 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getJokes } from '../../store/actions/userAction';
 import JokeCard from './JokeCard';
+import styled from "styled-components";
+
+const Background = styled.div`
+  background-color: #A8D0E6;
+`;
+
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: -30%;
+`;
+
+const Button = styled.button`
+  border-radius: 25px;
+  background-color: #f76C6C;
+  color: white;
+  font-weight: 500;
+  letter-spacing: 1px;
+  height: 40px;
+  width: 250px;
+  cursor: pointer;
+`;
 
 const Joke = ({getJokes, jokes}) => {
   const [random, setRandom] = useState(0)
@@ -27,12 +49,14 @@ const Joke = ({getJokes, jokes}) => {
   }
 
   return (
-    <div>
+    <Background>
       {
         jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} />
       }
-      <button onClick={newJoke}>New Joke</button>
-    </div>
+      <ButtonDiv>
+        <Button onClick={newJoke}>New Joke</Button>
+      </ButtonDiv>
+    </Background>
   );
 };
 

@@ -92,15 +92,6 @@ const useStyles = makeStyles({
         fontFamily: 'Roboto, sans-serif',
         margin: 20
     },
-    card:{
-        minWidth: 400,
-        maxWidth: 400,
-        maxHeight: 400,
-        fontFamily: 'Roboto, sans-serif',
-        backgroundColor: "ghostwhite",
-        boxShadow: '0 3px 5px 2px #5F685C',
-        marginTop: 10
-    },
     buttcont:{
         display: 'flex',
         justifyContent: 'center'
@@ -128,7 +119,7 @@ const useStyles = makeStyles({
         fontFamily: 'Roboto, sans-serif'
     },
     error:{
-        color: 'red'
+        color: 'maroon'
     }
 })
 

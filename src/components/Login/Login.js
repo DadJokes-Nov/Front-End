@@ -81,7 +81,7 @@ const useStyles = makeStyles({
         fontFamily: 'Roboto, sans-serif'
     },
     err:{
-        color: 'red',
+        color: 'maroon',
         fontSize: 18,
         fontFamily: 'Roboto, sans-serif'
     },
@@ -184,7 +184,7 @@ const LoginUserForm = ({ values, errors, touched, isAuthenticating, loggedIn, au
                         />
                     </div>
                     <div className={classes.buttcont}>
-                        <button className={classes.button}>Log back in to the fatherhood.</button>
+                        <button className={classes.button} type="submit">Log back in to the fatherhood.</button>
                     </div>
                     {authenticationError && (
                         <p className={classes.err}>{authenticationError.data}</p>
