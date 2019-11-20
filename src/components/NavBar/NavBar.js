@@ -30,6 +30,7 @@ const NavBar = () => {
       <div>
         <Link className={classes.a} to='/home'>Home</Link>
       </div>
+      {/* register and login should not appear on navbar when loggedin */}
       <div>
         <Link className={classes.a} to='/register'>Register</Link>
       </div>

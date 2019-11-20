@@ -1,7 +1,10 @@
 import {
   START_LOGIN,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  BEGIN_GET_JOKE,
+  GET_JOKE_FAILURE,
+  GET_JOKE_SUCCESS
 } from '../actions/userAction';
 
 const initState = {
@@ -12,39 +15,14 @@ const initState = {
     img_url: '',//this is where we will put default image
   },
 
-  jokes: [
-    {
-      id: 0,
-      joke: 'joke1',
-      punchline: 'punchline1'
-    },
-    {
-      id: 1,
-      joke: 'joke2',
-      punchline: 'punchline2'
-    },
-    {
-      id: 2,
-      joke: 'joke3',
-      punchline: 'punchline3'
-    },
-    {
-      id: 3,
-      joke: 'joke4',
-      punchline: 'punchline4'
-    },
-    {
-      id: 4,
-      joke: 'joke5',
-      punchline: 'punchline5'
-    }
-  ],
+  jokes: [],
 
   isAuthenticating: false,
   loggedIn: false,
   authenticationError: '',
 
-
+  isFetchingJokes: false,
+  jokesError: ''
 }
 
 export const userReducer = (state = initState, action) => {
@@ -75,6 +53,26 @@ export const userReducer = (state = initState, action) => {
         authenticationError: action.payload,
         isAuthenticating: false
       }
+
+    case BEGIN_GET_JOKE: 
+      return {
+        ...state,
+        isFetchingJokes: true
+      }
+
+    case GET_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokes: [...action.payload]
+      }
+    
+      case GET_JOKE_FAILURE:
+        return {
+          ...state,
+          isFetchingJokes: false,
+          jokesError: action.payload
+        }
 
     default: 
       return { 
