@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom'; 
 import { connect } from 'react-redux';
 
@@ -10,9 +10,19 @@ import Joke from './components/Joke/Joke';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import NavBar from './components/NavBar/NavBar';
+import { getUserInfo } from './store/actions/userAction';
+
+function App({getUserInfo}) {
+
+  const loggedIn = localStorage.getItem('token');
+
+  useEffect(() => {
+    if (loggedIn) {
+      getUserInfo(loggedIn);
+    }
+  }, [loggedIn, getUserInfo])
 
 
-function App() {
   return (
     <>
       <NavBar />
@@ -37,5 +47,5 @@ const mapStateToProps = state =>{
   };
 }
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, {getUserInfo})(App);
 

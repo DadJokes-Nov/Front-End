@@ -1,10 +1,10 @@
 import React from 'react';
 
-const JokeCard = props => {
-  console.log(props);
+const JokeCard = ({joke: {punchline, jokes_description}}) => {
   return (
     <div>
-      <h1>its alive</h1>
+      <h1>{jokes_description}</h1>
+      <h1>{punchline}</h1>
     </div>
   );
 };
