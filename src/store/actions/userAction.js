@@ -48,3 +48,25 @@ export const getJokes = () => dispatch => {
       // dispatch({ type: GET_JOKE_FAILURE , payload: error.response })
     });
 }
+
+export const BEGIN_ADD_JOKE = 'BEGIN_ADD_JOKE';
+export const ADD_JOKE_SUCCESS = 'ADD_JOKE_SUCCESS';
+export const ADD_JOKE_FAILURE = 'ADD_JOKE_FAILURE';
+
+export const addJoke = (joke) => dispatch => {
+  dispatch({ type: BEGIN_ADD_JOKE });
+
+  axios
+    .post('https://dad-jokes-2019.herokuapp.com/api/auth/jokes', joke)
+    .then(res => {
+      console.log(res);
+      return dispatch({ type: ADD_JOKE_SUCCESS, payload: res.data })
+    })
+    .catch(error => {
+      console.log(error);
+      console.log(error.response)
+      console.log(error.message)
+      //need to figure out what message we're going to display.
+      // dispatch({ type: ADD_JOKE_FAILURE , payload: error.response })
+    });
+}

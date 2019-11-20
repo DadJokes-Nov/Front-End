@@ -4,7 +4,10 @@ import {
   LOGIN_FAILURE,
   BEGIN_GET_JOKE,
   GET_JOKE_FAILURE,
-  GET_JOKE_SUCCESS
+  GET_JOKE_SUCCESS,
+  BEGIN_ADD_JOKE,
+  ADD_JOKE_SUCCESS,
+  ADD_JOKE_FAILURE
 } from '../actions/userAction';
 
 const initState = {
@@ -67,12 +70,33 @@ export const userReducer = (state = initState, action) => {
         jokes: [...action.payload]
       }
     
-      case GET_JOKE_FAILURE:
-        return {
-          ...state,
-          isFetchingJokes: false,
-          jokesError: action.payload
-        }
+    case GET_JOKE_FAILURE:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokesError: action.payload
+      }
+
+    case BEGIN_ADD_JOKE:
+      return {
+        ...state,
+        isFetchingJokes: true
+      }
+
+    case ADD_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokes: [...state.jokes, action.payload]
+      }
+
+    case ADD_JOKE_FAILURE:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokesError: action.payload
+      }
+      
 
     default: 
       return { 
