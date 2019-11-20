@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { addJoke } from '../../store/actions/userAction'
 
 const initialState = {
   description: '',
   punchline: '',
 }
 
-const AdminAddJoke = () => {
+const AdminAddJoke = ({addJoke}) => {
   const [joke, setJoke] = useState(initialState);
 
   const changeHandler = e => {
@@ -16,8 +17,8 @@ const AdminAddJoke = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    addJoke(joke);
     // this is where we will fire our redux add function.
-
   }
 
   return (
@@ -48,4 +49,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {})(AdminAddJoke);
+export default connect(mapStateToProps, { addJoke })(AdminAddJoke);

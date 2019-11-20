@@ -7,7 +7,10 @@ import {
   GET_JOKE_SUCCESS,
   BEGIN_ADD_JOKE,
   ADD_JOKE_SUCCESS,
-  ADD_JOKE_FAILURE
+  ADD_JOKE_FAILURE,
+  BEGIN_GET_USER_INFO,
+  GET_USER_INFO_FAILURE,
+  GET_USER_INFO_SUCCESS
 } from '../actions/userAction';
 
 const initState = {
@@ -25,7 +28,8 @@ const initState = {
   authenticationError: '',
 
   isFetchingJokes: false,
-  jokesError: ''
+  jokesError: '',
+  userInfoError: ''
 }
 
 export const userReducer = (state = initState, action) => {
@@ -96,7 +100,32 @@ export const userReducer = (state = initState, action) => {
         isFetchingJokes: false,
         jokesError: action.payload
       }
-      
+
+    case BEGIN_GET_USER_INFO:
+      return {
+        ...state,
+        isFetchingJokes: true
+      }
+
+    case GET_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        loggedIn: true,
+        user: {
+          name: action.payload.name,
+          id: action.payload.id,
+          email: action.payload.email,
+          img_url: action.payload.img_url
+        }
+      } 
+
+    case GET_USER_INFO_FAILURE:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        userInfoError: action.payload
+      }
 
     default: 
       return { 
