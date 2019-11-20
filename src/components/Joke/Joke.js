@@ -23,6 +23,7 @@ const Button = styled.button`
   height: 40px;
   width: 250px;
   cursor: pointer;
+  font-family: 'Roboto', sans-serif;
 `;
 
 const Joke = ({getJokes, jokes}) => {

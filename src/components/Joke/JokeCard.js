@@ -38,6 +38,7 @@ const Button = styled.button`
   height: 40px;
   width: 200px;
   cursor: pointer;
+  font-family: 'Roboto', sans-serif;
 `;
 
 const JokeCard = ({joke: {punchline, jokes_description}}) => {
