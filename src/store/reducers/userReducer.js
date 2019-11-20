@@ -10,7 +10,10 @@ import {
   ADD_JOKE_FAILURE,
   BEGIN_GET_USER_INFO,
   GET_USER_INFO_FAILURE,
-  GET_USER_INFO_SUCCESS
+  GET_USER_INFO_SUCCESS,
+  BEGIN_DELETE_JOKE,
+  DELETE_JOKE_SUCCESS,
+  DELETE_JOKE_FAILURE
 } from '../actions/userAction';
 
 const initState = {
@@ -121,6 +124,25 @@ export const userReducer = (state = initState, action) => {
       } 
 
     case GET_USER_INFO_FAILURE:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        userInfoError: action.payload
+      }
+
+    case BEGIN_DELETE_JOKE:
+      return {
+        ...state,
+        isFetchingJokes: true
+      }
+    case DELETE_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokes: state.jokes.filter(joke => joke.id !== action.payload) 
+      }
+
+    case DELETE_JOKE_FAILURE:
       return {
         ...state,
         isFetchingJokes: false,

@@ -114,3 +114,25 @@ export const updateJoke = (id, joke) => dispatch => {
     // dispatch({ type: UPDATE_JOKE_FAILURE , payload: error.response })
   });
 }
+
+export const BEGIN_DELETE_JOKE = 'BEGIN_DELETE_JOKE';
+export const DELETE_JOKE_SUCCESS = 'DELETE_JOKE_SUCCESS';
+export const DELETE_JOKE_FAILURE = 'DELETE_JOKE_FAILURE';
+
+export const deleteJoke = (id) => dispatch => {
+  dispatch({ type: BEGIN_DELETE_JOKE })
+
+  axiosInstance
+  .delete(`https://dad-jokes-2019.herokuapp.com/api/auth/jokes/${id}`)
+  .then(res => {
+    console.log(res);
+    dispatch({ type: DELETE_JOKE_SUCCESS, payload: id })
+  })
+  .catch(error => {
+    console.log(error);
+    console.log(error.response)
+    console.log(error.message)
+    //need to figure out what message we're going to display.
+    // dispatch({ type: DELETE_JOKE_FAILURE , payload: error.response })
+  });
+}
