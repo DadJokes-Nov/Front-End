@@ -27,6 +27,7 @@ export const loginUser = credentials => dispatch => {
     });
 }
 
+
 export const BEGIN_GET_JOKE = 'BEGIN_GET_JOKE';
 export const GET_JOKE_SUCCESS = 'GET_JOKE_SUCCESS';
 export const GET_JOKE_FAILURE = 'GET_JOKE_FAILURE';
