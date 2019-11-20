@@ -21,6 +21,7 @@ import dummyData from "./dummyData";
 function App() {
   const [jokeList, setTeamList] = useState(dummyData);
   const addNewJoke = form => {
+    console.log(form,"form")
     setTeamList([...jokeList, form]);
   };
   return (
@@ -31,7 +32,7 @@ function App() {
           <Admin />
         </PrivateRoute>
         <Route path='/home' component={Home} />
-        <Route path='/joke' render={ () =><FormJoke addNewJoke={addNewJoke} />, <Joke joke={jokeList} />} />
+        <Route path='/joke' render={ () => <Joke addNewJoke={addNewJoke} joke={jokeList} />} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route component={Home} />

@@ -1,10 +1,13 @@
 import React from "react";
+import FormJoke from "./FormJoke";
 
 function Joke(props) {
   console.log(props, "props");
   return (
     <div>
-      {props.Joke.map(form => {
+      <FormJoke addNewJoke={props.addNewJoke}/>
+      {props.joke.map(form => {
+
         return (
           <div>
             <p>{form.addJoke}</p>

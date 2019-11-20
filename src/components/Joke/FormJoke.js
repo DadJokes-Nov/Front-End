@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
 function Form(props) {
+    // console.log(props,"formjoke props")
     const [form, setForm] = useState({addJoke: "", punchLine: ""})
+    console.log(form, "form again")
 
     const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
@@ -22,15 +24,15 @@ function Form(props) {
             <input 
             type="text" 
             placeholder="Add Joke"
-            name="punch-line"
-            value={form.name}
+            name="addJoke"
+            value={form.addJoke}
             onChange={changeHandler}/>
             <label htmlFor="punch-line">Punch Line</label>
             <input 
             type="text"
-            name="punch-line"
-            placeholder="Email"
-            value={form.email}
+            name="punchLine"
+            placeholder="punch line"
+            value={form.punchLine}
             onChange={changeHandler}/>
             <button type="submit">Submit</button>
         </form>
