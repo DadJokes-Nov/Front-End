@@ -10,6 +10,7 @@ const Admin = ({ getJokes, jokes }) => {
       getJokes();
     }
   }, [getJokes, jokes.length])
+  
   return (
     <div>
       <h1>INSIDE ADMIN!</h1>
