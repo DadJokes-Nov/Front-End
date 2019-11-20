@@ -8,7 +8,6 @@ const Admin = ({ getJokes, jokes }) => {
   // only want to get jokes if we haven't already!  Maybe we do want to update jokes all the time?  🤔
   useEffect(() => {
     if (jokes.length === 0) {
-      console.log('getting jokes')
       getJokes();
     }
   }, [getJokes, jokes.length])

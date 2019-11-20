@@ -127,7 +127,6 @@ const LoginUserForm = ({ values, errors, touched, isAuthenticating, loggedIn, au
 
   const classes = useStyles();
   const history = useHistory();
-  console.log(loggedIn);
 
   if (loggedIn) {
       history.push('/');
