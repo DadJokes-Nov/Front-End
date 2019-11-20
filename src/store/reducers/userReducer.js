@@ -1,7 +1,10 @@
 import {
   START_LOGIN,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  BEGIN_GET_JOKE,
+  GET_JOKE_FAILURE,
+  GET_JOKE_SUCCESS
 } from '../actions/userAction';
 
 const initState = {
@@ -44,7 +47,8 @@ const initState = {
   loggedIn: false,
   authenticationError: '',
 
-
+  isFetchingJokes: false,
+  jokesError: ''
 }
 
 export const userReducer = (state = initState, action) => {
@@ -75,6 +79,26 @@ export const userReducer = (state = initState, action) => {
         authenticationError: action.payload,
         isAuthenticating: false
       }
+
+    case BEGIN_GET_JOKE: 
+      return {
+        ...state,
+        isFetchingJokes: true
+      }
+
+    case GET_JOKE_SUCCESS:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        jokes: [...state.jokes, ...action.payload]
+      }
+    
+      case GET_JOKE_FAILURE:
+        return {
+          ...state,
+          isFetchingJokes: false,
+          jokesError: action.payload
+        }
 
     default: 
       return { 

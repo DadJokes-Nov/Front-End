@@ -244,10 +244,11 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                     />
                     <span className="checkmark" />
                     </label>
-                    <div className={classes.buttcont} type="submit">
-                        <button className={classes.button}>Join the fatherhood.</button>
-                    </div>
+                    {/* <div className={classes.buttcont}> */}
+                        <button type="submit" className={classes.button}>Join the fatherhood.</button>
+                    {/* </div> */}
                 </div>
+                <button type="submit" className={classes.button}>Join the fatherhood.</button>
             </Form>
             <h1 className={classes.joke}>Because they don't like to commit.</h1>
             <p className={classes.reroute}>
@@ -258,21 +259,6 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                 .
             </p>
         </div>
-        {/* Not sure what this code is suppose to be doing? vvv */}
-        {/* {users.map(user => (
-        <Card className={classes.card}>
-            <CardContent>
-                <div key={user.id}>
-                <Typography variant="subtitle" component="h2">Name: {user.name}</Typography>
-                <Typography variant="subtitle" component="h3">Email: {user.email}</Typography>
-                <Typography variant="subtitle" component="h3">Password: {user.password}</Typography>
-                <Typography variant="subtitle" component="h3">Username: {user.username}</Typography>
-                <Typography variant="subtitle" component="h4">Is not a robot: {user.robotbox ? 'yes' : 'no'}</Typography>
-                <CardMedia className="cardmedia" image={user.image} title="User Avatar" />
-                </div>
-            </CardContent>
-        </Card>
-      ))} */}
     </div>  
   );
 };
@@ -289,41 +275,41 @@ const FormikForm = withFormik({
       robotbox: robotbox || false
     };
   },
+
+  //one of these validations is broken/not showing properly.  my guess is the confirm.  
   validationSchema: Yup.object().shape({
-    name: Yup.string()
-        .min(2, "Your name must be at least 2 characters long.")
-        .required("Name is required."),
-    email: Yup.string()
-        .email("This is an invalid email.")
-        .required("Email is a required field."),
-    username: Yup.string()
-        .min(5, "Your username must be at least 5 characters long.")
-        .required("Enter a username."),
-    password: Yup.string()
-        .min(8, "Password must be 8 characters or longer.")
-        .required("Enter your password. Do not make me ask again."),
-    confrim: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Password must match!")
-        .required("Please enter the same password again!"),
-    robotbox: Yup.bool().oneOf([true], "Error. Please check this box to let us know that you are an omniscient being - AI and the inferior human.")
+    // name: Yup.string()
+    //     .min(2, "Your name must be at least 2 characters long.")
+    //     .required("Name is required."),
+    // email: Yup.string()
+    //     .email("This is an invalid email.")
+    //     .required("Email is a required field."),
+    // username: Yup.string()
+    //     .min(5, "Your username must be at least 5 characters long.")
+    //     .required("Enter a username."),
+    // password: Yup.string()
+    //     .min(8, "Password must be 8 characters or longer.")
+    //     .required("Enter your password. Do not make me ask again."),
+    // confrim: Yup.string()
+    //     .oneOf([Yup.ref("password"), null], "Password must match!")
+    //     .required("Please enter the same password again!"),
+    // robotbox: Yup.bool().oneOf([true], "Error. Please check this box to let us know that you are an omniscient being - AI and the inferior human.")
   }),
 
   handleSubmit(values, { setStatus, setSubmitting, props, resetForm }) {
 
-    //values is our object with all our data on it
-
-    //this is a placeholder until backend creates an api to connect to
     console.log('submitting');
-    axios.post('http:/localhost:4300/api/users/register', {
+    console.log(values);
+    axios.post('https://dad-jokes-2019.herokuapp.com/api/auth/register', {
         username: values.username,
         email: values.email,
         password: values.password
     })
       .then(res => {
         console.log(res);
-        // setStatus(res.data);
-        // resetForm();
-        // props.history.push('/login');
+        setStatus(res.data);
+        resetForm();
+        props.history.push('/login');
       })
       .catch(error => console.log(error.message, error.status, error, error.data));
   }
