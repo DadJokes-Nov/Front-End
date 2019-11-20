@@ -132,13 +132,8 @@ const useStyles = makeStyles({
 })
 
 
-const RegisterUserForm = ({ values, errors, touched, status }) => {
-    // const [users, setUsers] = useState([]); possibly unnecessary code
+const RegisterUserForm = ({ values, errors, touched }) => {
     const classes = useStyles();
-
-    // useEffect(() => { possibly unnecessary code
-    // status && setUsers(users => [...users, status]);
-    // }, [status]);
 
   return (
    <div className={classes.background}> 
@@ -149,7 +144,7 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                 <div className={classes.formwrapper}>
                     <div>
                         <label className={classes.fieldlabel}>
-                            First Name *{" "}
+                            Full Name *{" "}
                             {touched.name && errors.name && (
                             <p className={classes.error}>{errors.name}</p>
                             )}
@@ -244,8 +239,8 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                     />
                     <span className="checkmark" />
                     </label>
-                    <div className={classes.buttcont} type="submit">
-                        <button className={classes.button}>Join the fatherhood.</button>
+                    <div className={classes.buttcont}>
+                        <button className={classes.button} type="submit">Join the fatherhood.</button>
                     </div>
                 </div>
             </Form>
@@ -258,21 +253,6 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                 .
             </p>
         </div>
-        {/* Not sure what this code is suppose to be doing? vvv */}
-        {/* {users.map(user => (
-        <Card className={classes.card}>
-            <CardContent>
-                <div key={user.id}>
-                <Typography variant="subtitle" component="h2">Name: {user.name}</Typography>
-                <Typography variant="subtitle" component="h3">Email: {user.email}</Typography>
-                <Typography variant="subtitle" component="h3">Password: {user.password}</Typography>
-                <Typography variant="subtitle" component="h3">Username: {user.username}</Typography>
-                <Typography variant="subtitle" component="h4">Is not a robot: {user.robotbox ? 'yes' : 'no'}</Typography>
-                <CardMedia className="cardmedia" image={user.image} title="User Avatar" />
-                </div>
-            </CardContent>
-        </Card>
-      ))} */}
     </div>  
   );
 };
@@ -309,10 +289,6 @@ const FormikForm = withFormik({
   }),
 
   handleSubmit(values, { setStatus, setSubmitting, props, resetForm }) {
-
-    //values is our object with all our data on it
-
-    //this is a placeholder until backend creates an api to connect to
     console.log('submitting');
     axios.post('http:/localhost:4300/api/users/register', {
         username: values.username,

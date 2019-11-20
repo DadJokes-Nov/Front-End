@@ -15,10 +15,11 @@ const Button1 =styled.button`
     border-radius: 5px;
     font-family: 'Source Code Pro', monospace;
     margin-top: 5%;
-    box-shadow: 2px 2px 6px chartreuse;
+    box-shadow: 2px 2px 6px #24305E;
     color: white;
-    background: lime;
+    background: #24305E;
     border: 1px solid white;
+    margin-left: 47%;
 ;`
 
 const Button2 =styled.button`
@@ -26,10 +27,11 @@ const Button2 =styled.button`
     border-radius: 5px;
     font-family: 'Source Code Pro', monospace;
     margin-top: 10%;
-    box-shadow: 2px 2px 6px chartreuse;
+    box-shadow: 2px 2px 6px #24305E;
     color: white;
-    background: lime;
+    background: #24305E;
     border: 1px solid white;
+    margin-left: 48%;
 ;`
 
 const Wub =styled.div`
