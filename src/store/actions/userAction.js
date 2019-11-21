@@ -34,7 +34,7 @@ export const loginUser = credentials => dispatch => {
       console.log(error.response)
       console.log(error.message)
       //need to figure out what message we're going to display.
-      // dispatch({ type: LOGIN_FAILURE, payload: error.response })
+      dispatch({ type: LOGIN_FAILURE, payload: error.response })
     });
 }
 
@@ -93,7 +93,7 @@ export const getUserInfo = id => dispatch => {
   dispatch({ type: BEGIN_GET_USER_INFO });
 
   
-  axios
+  axiosWithAuth()
     .get(`https://dad-jokes-2019.herokuapp.com/api/auth/${id}`)
     .then(res => {
       console.log(res);
@@ -115,7 +115,7 @@ export const UPDATE_JOKE_FAILURE = 'UPDATE_JOKE_FAILURE';
 export const updateJoke = (id, joke) => dispatch => {
   dispatch({ type: BEGIN_UPDATE_JOKE });
 
-  axiosWithAuth
+  axiosWithAuth()
   .put(`https://dad-jokes-2019.herokuapp.com/api/auth/jokes/${id}`, {
     'punchline': joke.punchline,
     'jokes_description': joke.description

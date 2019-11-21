@@ -94,7 +94,7 @@ const AdminCard = ({joke: {id, punchline, jokes_description}, updateJoke, delete
     <div className={classes.cont}>
       <div className={classes.card}>
         <form className={classes.form} onSubmit={handleSubmit}>
-          <label>Description:
+          <label>Description: {id}
           <textarea rows='3' cols='25'
           type='text'
           name='description'
@@ -103,7 +103,7 @@ const AdminCard = ({joke: {id, punchline, jokes_description}, updateJoke, delete
           value={joke.description}
           className={classes.desc}
           /></label>
-          <label>Punchline:
+          <label>Punchline: {id}
           <textarea rows='3' cols='25'
           type='text'
           name='punchline'

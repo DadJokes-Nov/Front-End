@@ -59,7 +59,7 @@ const NavBar = ({ loggedIn, logoutUser }) => {
       </div>
 
       <div>
-        <Link className={classes.a} to='/joke'>Joke</Link>
+        <Link className={classes.a} to='/joke'>Jokes</Link>
       </div>
 
       
