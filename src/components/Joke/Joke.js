@@ -97,10 +97,9 @@ const Joke = ({ getJokes, jokes }) => {
 
     <Background>
       <JokeCardDiv>
-        <p>{time}</p>
         {
           // this test that we actually have jokes before we display a joke
-          jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} newJoke={newJoke} jokesLength={jokes.length} punch={punch} setPunch={setPunch} />
+          jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} newJoke={newJoke} jokesLength={jokes.length} punch={punch} setPunch={setPunch} time={time} />
         }
       </JokeCardDiv>
     </Background>

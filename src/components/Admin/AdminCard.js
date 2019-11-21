@@ -124,7 +124,7 @@ const AdminCard = ({joke: {id, punchline, jokes_description}, updateJoke, delete
 
 function mapStateToProps(state) {
   return {
-
+    
   }
 }
 

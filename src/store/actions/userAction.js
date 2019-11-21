@@ -24,7 +24,7 @@ export const loginUser = credentials => dispatch => {
     .post('https://dad-jokes-2019.herokuapp.com/api/auth/login', credentials)
     .then(res => {
       localStorage.setItem('token', res.data.token)
-      // localStorage.setItem('id', res.data.id)
+      localStorage.setItem('id', res.data.id)
       console.log(res);
       // Need to fix the payload.  Once backend is updated we should get back username, email, image url, and maybe userID
       return dispatch({ type: LOGIN_SUCCESS, payload: res })
@@ -89,10 +89,10 @@ export const BEGIN_GET_USER_INFO = 'BEGIN_GET_USER_INFO';
 export const GET_USER_INFO_SUCCESS = 'GET_USER_INFO_SUCCESS';
 export const GET_USER_INFO_FAILURE = 'GET_USER_INFO_FAILURE';
 
-export const getUserInfo = id => dispatch => {
+export const getUserInfo = () => dispatch => {
   dispatch({ type: BEGIN_GET_USER_INFO });
 
-  
+  const id = localStorage.getItem('id')
   axiosWithAuth()
     .get(`https://dad-jokes-2019.herokuapp.com/api/auth/${id}`)
     .then(res => {
@@ -162,5 +162,6 @@ export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 export const logoutUser = () => dispatch => {
   dispatch({ type: BEGIN_LOGOUT });
   localStorage.removeItem('token');
+  localStorage.removeItem('id');
   dispatch({ type: LOGOUT_SUCCESS  })
 }

@@ -74,8 +74,9 @@ const initialState = {
   punchline: '',
 }
 
-const AdminAddJoke = ({addJoke}) => {
+const AdminAddJoke = ({addJoke, jokeSuccess}) => {
   const [joke, setJoke] = useState(initialState);
+  console.log(jokeSuccess);
 
   const classes = useStyles();
 
@@ -115,6 +116,7 @@ const AdminAddJoke = ({addJoke}) => {
           className={classes.punch}
           />
           {/* might want a success message here so user sees their joke was added! */}
+          {jokeSuccess && (<h2>{jokeSuccess}</h2>)}
           <button className={classes.butt}>Add Joke</button>
         </form>
       </div>
@@ -124,7 +126,7 @@ const AdminAddJoke = ({addJoke}) => {
 
 function mapStateToProps(state) {
   return {
-
+    jokeSuccess: state.jokeSuccess
   }
 }
 
