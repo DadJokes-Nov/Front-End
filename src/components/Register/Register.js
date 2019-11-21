@@ -122,7 +122,27 @@ const useStyles = makeStyles({
 
 const RegisterUserForm = ({ values, errors, touched }) => {
 
+    // const [users, setUsers] = useState([]); possibly unnecessary code
+
+    //PLEASE NO DELETE FOR MY MVP -LEXIE thank u v mucho
+
+    // useEffect(() => {
+    //     axiosWithAuth()
+    //     .get(`https://dad-jokes-2019.herokuapp.com/api/users/${props.userId}`)
+    //     .then(res => {
+    //         console.log(res)
+    //        setUsers(res.data)
+    //     })
+    //     .catch(err => {
+    //         console.log("There was an error, ", err)
+    //     })
+    // },[])
+
     const classes = useStyles();
+
+    // useEffect(() => { possibly unnecessary code
+    // status && setUsers(users => [...users, status]);
+    // }, [status]);
 
   return (
    <div className={classes.background}> 
