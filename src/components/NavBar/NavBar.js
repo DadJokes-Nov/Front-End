@@ -43,6 +43,13 @@ const NavBar = ({ loggedIn, logoutUser }) => {
     e.preventDefault();
     logoutUser();
   }
+  
+  //DO NOT REMOVE - onclick needed for MVP for Lexie
+
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   props.history.push("/login");
+  // };
 
   return (
     <NavDiv>
@@ -71,6 +78,12 @@ const NavBar = ({ loggedIn, logoutUser }) => {
        <LogOut onClick={logout}>
          Logout <span role='img' aria-label='cry'>😭</span>
        </LogOut>
+
+
+      {/* DO NOT DELETE - onClick needed for Lexie's Friday MVP */}
+       {/* <button className="navlinkButt" onClick={handleLogout}>
+          Logout
+        </button> */}
       </>
       )}
       
