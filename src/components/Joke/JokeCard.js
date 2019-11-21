@@ -48,7 +48,6 @@ const Button = styled.button`
 
 const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLength}) => {
   const [punch, setPunch] = useState(false);
-  console.log(jokesLength);
 
   const showPunch = e => {
     e.preventDefault();
