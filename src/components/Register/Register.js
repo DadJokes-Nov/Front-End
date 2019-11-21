@@ -305,8 +305,9 @@ const FormikForm = withFormik({
     console.log(values);
     axios.post('https://dad-jokes-2019.herokuapp.com/api/auth/register', {
         username: values.username,
-        // email: values.email,
-        password: values.password
+        email: values.email,
+        password: values.password,
+
     })
       .then(res => {
         console.log(res);
