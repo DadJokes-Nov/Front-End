@@ -80,7 +80,7 @@ const NavBar = ({ loggedIn, logoutUser }) => {
        </LogOut>
 
 
-      {/* DO NOT DELETE - onClick needed for Lexie's Friday MVP */}
+      {/* DO NOT DELETE - onClick needed for Lexie's Friday MVP // onClick will call the logout function declared at the top*/}
        {/* <button className="navlinkButt" onClick={handleLogout}>
           Logout
         </button> */}
