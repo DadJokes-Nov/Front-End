@@ -63,7 +63,7 @@ const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLengt
     <Container>
       <CardDiv>
         <CardInnerDiv>
-          <h3>Joke # {id}/100{/*jokesLength <-- this is how we should do it but we should assign each joke a new # because ID won't help with deletes.*/}</h3>
+          <h3>Joke # {id}/{jokesLength +50}{/*jokesLength <-- this is how we should do it but we should assign each joke a new # because ID won't help with deletes.  So +50 makes us look like we have a lot too :D*/}</h3>
           
           <JokeDesc>{jokes_description}</JokeDesc>
           {!punch && 

@@ -1,6 +1,16 @@
 // import { axiosInstance } from '../../utils/axiosInstance';
 import axios from 'axios';
 
+const axiosWithAuth = () => {
+  const token = localStorage.getItem('token')
+  return axios.create({
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }
+  })
+}
+
 export const START_LOGIN = 'START_LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN FAILURE';
@@ -14,6 +24,7 @@ export const loginUser = credentials => dispatch => {
     .post('https://dad-jokes-2019.herokuapp.com/api/auth/login', credentials)
     .then(res => {
       localStorage.setItem('token', res.data.token)
+      // localStorage.setItem('id', res.data.id)
       console.log(res);
       // Need to fix the payload.  Once backend is updated we should get back username, email, image url, and maybe userID
       return dispatch({ type: LOGIN_SUCCESS, payload: res })
@@ -56,18 +67,10 @@ export const ADD_JOKE_FAILURE = 'ADD_JOKE_FAILURE';
 export const addJoke = joke => dispatch => {
   dispatch({ type: BEGIN_ADD_JOKE });
 
-  console.log('adding joke', joke);
-  const token = localStorage.getItem('token')
-  axios
+  axiosWithAuth()
     .post('https://dad-jokes-2019.herokuapp.com/api/auth/jokes', {
       'punchline': joke.punchline,
       'jokes_description': joke.description
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': token
-      }
     })
     .then(res => {
       console.log(res);
@@ -89,9 +92,9 @@ export const GET_USER_INFO_FAILURE = 'GET_USER_INFO_FAILURE';
 export const getUserInfo = id => dispatch => {
   dispatch({ type: BEGIN_GET_USER_INFO });
 
-  // needs an endpoint for this!
+  
   axios
-    .get(`https://dad-jokes-2019.herokuapp.com/users/${id}`)
+    .get(`https://dad-jokes-2019.herokuapp.com/api/auth/${id}`)
     .then(res => {
       console.log(res);
       dispatch({ type: GET_USER_INFO_SUCCESS, payload: res.data });
@@ -111,17 +114,11 @@ export const UPDATE_JOKE_FAILURE = 'UPDATE_JOKE_FAILURE';
 
 export const updateJoke = (id, joke) => dispatch => {
   dispatch({ type: BEGIN_UPDATE_JOKE });
-  const token = localStorage.getItem('token')
-  axios
+
+  axiosWithAuth
   .put(`https://dad-jokes-2019.herokuapp.com/api/auth/jokes/${id}`, {
     'punchline': joke.punchline,
     'jokes_description': joke.description
-  },
-  {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': token
-    }
   })
   .then(res => {
     console.log(res);
@@ -166,16 +163,4 @@ export const logoutUser = () => dispatch => {
   dispatch({ type: BEGIN_LOGOUT });
   localStorage.removeItem('token');
   dispatch({ type: LOGOUT_SUCCESS  })
-  // axios.get('https://dad-jokes-2019.herokuapp.com/api/auth/logout')
-  // .then(res => {
-  //   localStorage.removeItem('token');
-  //   dispatch({ type: LOGOUT_SUCCESS, payload: res.data })
-  // })
-  // .catch(error => {
-  //   console.log(error);
-  //   console.log(error.response)
-  //   console.log(error.message)
-    //need to figure out what message we're going to display.
-    // dispatch({ type: LOGOUT_FAILURE , payload: error.response })
-  // });
 }
