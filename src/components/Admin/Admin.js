@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getJokes } from '../../store/actions/userAction';
 import AdminCard from './AdminCard';
 import AdminAddJoke from './AdminAddJoke';
-import { classes } from 'istanbul-lib-coverage';
+// import { classes } from 'istanbul-lib-coverage';
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -27,6 +27,7 @@ const Admin = ({ getJokes, jokes }) => {
 
   return (
     <div className={classes.background}>
+      <h1>I HAVE THE POWER!</h1>
       <AdminAddJoke />
       {jokes.map(joke => {
         return (

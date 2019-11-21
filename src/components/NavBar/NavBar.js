@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
+import { connect } from 'react-redux';
+import { logoutUser } from '../../store/actions/userAction';
 
 const NavDiv = styled.div`
   background-color: #374785;
-  height: 50px;
+  height: 40px;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -13,6 +15,15 @@ const NavDiv = styled.div`
   z-index: 1000;
   position: fixed;
 `;
+
+const LogOut = styled.div`
+  background-color: #374785;
+  color: white;
+  fontFamily: Roboto, sans-serif;
+  fontSize: 20;
+  textDecoration: none;
+  cursor: pointer;
+`
 
 
 const useStyles = makeStyles({
@@ -24,32 +35,54 @@ const useStyles = makeStyles({
   }
 });
 
-const NavBar = () => {
+const NavBar = ({ loggedIn, logoutUser }) => {
 
   const classes= useStyles();
 
+  const logout = e => {
+    e.preventDefault();
+    logoutUser();
+  }
+
   return (
     <NavDiv>
-      <div>
-        <Link className={classes.a} to='/home'>Home</Link>
-      </div>
       {/* register and login should not appear on navbar when loggedin */}
+      {!loggedIn && (
+        <>
       <div>
         <Link className={classes.a} to='/register'>Register</Link>
       </div>
       <div>
         <Link className={classes.a} to='/login'>Login</Link>
       </div>
+      </>
+      )}
       <div>
         <Link className={classes.a} to='/joke'>Joke</Link>
       </div>
       
-      <div>
-        {/* this route should eventually check if user is admin to be visible. */}
+      {loggedIn && (
+        <>
+        <div>
         <Link className={classes.a} to='/admin'>Admin</Link>
       </div>
+
+       {/* <Avatar src={user.img_url} className={classes.avatar} /> for when we look into using a image  */}
+       <LogOut onClick={logout}>
+         Logout <span role='img' aria-label='cry'>😭</span>
+       </LogOut>
+      </>
+      )}
+      
+      {/* this is where we will create drop down menu for a user to logout or update user settings */}
     </NavDiv>
   );
 };
 
-export default NavBar;
+function mapStateToProps(state) {
+  return {
+    loggedIn: state.loggedIn
+  }
+}
+
+export default connect(mapStateToProps, { logoutUser })(NavBar)

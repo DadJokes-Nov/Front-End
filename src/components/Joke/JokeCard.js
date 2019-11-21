@@ -16,8 +16,8 @@ const CardDiv = styled.div`
 `;
 
 const CardInnerDiv = styled.div`
-  width: 500px;
-  height: 300px;
+  width: 80%;
+  height: 60vh;
   border: 1px solid black;
   border-radius: 25px;
   display: flex;
@@ -46,22 +46,34 @@ const Button = styled.button`
   font-family: 'Roboto', sans-serif;
 `;
 
-const JokeCard = ({joke: {punchline, jokes_description}}) => {
+const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLength}) => {
   const [punch, setPunch] = useState(false);
 
   const showPunch = e => {
     e.preventDefault();
     setPunch(true);
   }
+
+  const next = e => {
+    e.preventDefault();
+    setPunch(false);
+    newJoke();
+  }
   return (
     <Container>
       <CardDiv>
         <CardInnerDiv>
+          <h3>Joke # {id}/100{/*jokesLength <-- this is how we should do it but we should assign each joke a new # because ID won't help with deletes.*/}</h3>
+          
           <JokeDesc>{jokes_description}</JokeDesc>
-          {/* we will hide punchline til a button that we build in this component is created. */}
-          <Button onClick={showPunch}>Show Punchline</Button>
+          {!punch && 
+          // button will not be visible when punchline is being shown
+          <Button onClick={showPunch}>Git Joke <span role='img' aria-label='laugh'>🤣🤣</span></Button>
+          }
+          {/* button click shows puncline and is always set back to false on newJoke! */}
           {punch && <h2>{punchline}</h2>
           }
+          <Button onClick={next}>Next Joke</Button>
         </CardInnerDiv>
       </CardDiv>
     </Container>

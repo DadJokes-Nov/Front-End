@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import './styles/global.scss'
 import PrivateRoute from './components/Private/PrivateRoute';
 import Admin from './components/Admin/Admin';
-import Home from './components/Home/Home';
 import Joke from './components/Joke/Joke';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
@@ -30,11 +29,10 @@ function App({getUserInfo}) {
         <PrivateRoute path='/admin'>
           <Admin />
         </PrivateRoute>
-        <Route path='/home' component={Home} />
         <Route path='/joke' component={Joke} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
-        <Route component={Home} />
+        <Route component={Joke} />
       </Switch>
     </>
   );

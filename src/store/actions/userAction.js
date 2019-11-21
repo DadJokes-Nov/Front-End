@@ -157,3 +157,25 @@ export const deleteJoke = (id) => dispatch => {
     // dispatch({ type: DELETE_JOKE_FAILURE , payload: error.response })
   });
 }
+
+export const BEGIN_LOGOUT = "BEGIN_LOGOUT";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
+
+export const logoutUser = () => dispatch => {
+  dispatch({ type: BEGIN_LOGOUT });
+  localStorage.removeItem('token');
+  dispatch({ type: LOGOUT_SUCCESS  })
+  // axios.get('https://dad-jokes-2019.herokuapp.com/api/auth/logout')
+  // .then(res => {
+  //   localStorage.removeItem('token');
+  //   dispatch({ type: LOGOUT_SUCCESS, payload: res.data })
+  // })
+  // .catch(error => {
+  //   console.log(error);
+  //   console.log(error.response)
+  //   console.log(error.message)
+    //need to figure out what message we're going to display.
+    // dispatch({ type: LOGOUT_FAILURE , payload: error.response })
+  // });
+}

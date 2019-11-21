@@ -17,6 +17,9 @@ import {
   UPDATE_JOKE_SUCCESS,
   UPDATE_JOKE_FAILURE,
   BEGIN_UPDATE_JOKE,
+  BEGIN_LOGOUT,
+  LOGOUT_FAILURE,
+  LOGOUT_SUCCESS
 } from '../actions/userAction';
 
 const initState = {
@@ -24,7 +27,7 @@ const initState = {
     name: '',
     id: null,
     email: '',
-    img_url: '',//this is where we will put default image
+    img_url: '',
   },
 
   jokes: [],
@@ -175,6 +178,28 @@ export const userReducer = (state = initState, action) => {
         ...state,
         isFetchingJokes: false,
         userInfoError: action.payload
+      }
+
+    case BEGIN_LOGOUT:
+      return {
+        ...state,
+        isFetchingJokes: true,
+      }
+
+    case LOGOUT_FAILURE:
+      return {
+        ...state,
+        isFetchingJokes: false,
+        userInfoError: action.payload
+      }
+
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        userInfoError: action.payload,
+        user: initState.user,
+        isFetchingJokes: false,
+        loggedIn: false
       }
 
     default: 
