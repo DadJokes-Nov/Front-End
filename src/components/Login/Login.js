@@ -221,8 +221,8 @@ const FormikForm = withFormik({
     handleSubmit(values, { props }) {
       props.loginUser({
         //   vvv this is bypassing it eventually will need to either add this or remove it from back end 
-          username: 'asdfasdfasdf',
-          email: values.username,
+        //   username: 'asdfasdfasdf',
+          username: values.username,
           password: values.password
         //   more comments
     })
