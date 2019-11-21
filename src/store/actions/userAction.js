@@ -30,10 +30,7 @@ export const loginUser = credentials => dispatch => {
       return dispatch({ type: LOGIN_SUCCESS, payload: res })
     })
     .catch(error => {
-      console.log(error);
-      console.log(error.response)
-      console.log(error.message)
-      //need to figure out what message we're going to display.
+      console.error(error);
       dispatch({ type: LOGIN_FAILURE, payload: error.response })
     });
 }
@@ -52,11 +49,11 @@ export const getJokes = () => dispatch => {
       return dispatch({ type: GET_JOKE_SUCCESS , payload: res.data })
     })
     .catch(error => {
-      console.log(error);
-      console.log(error.response)
-      console.log(error.message)
+      console.error(error);
+      // console.log(error.response)
+      // console.log(error.message)
       //need to figure out what message we're going to display.
-      // dispatch({ type: GET_JOKE_FAILURE , payload: error.response })
+      dispatch({ type: GET_JOKE_FAILURE , payload: error.response })
     });
 }
 
@@ -77,11 +74,9 @@ export const addJoke = joke => dispatch => {
       return dispatch({ type: ADD_JOKE_SUCCESS, payload: res.data })
     })
     .catch(error => {
-      console.log(error);
-      console.log(error.response)
-      console.log(error.message)
+      console.error(error);
       //need to figure out what message we're going to display.
-      // dispatch({ type: ADD_JOKE_FAILURE , payload: error.response })
+      dispatch({ type: ADD_JOKE_FAILURE , payload: error.response })
     });
 }
 
@@ -100,11 +95,9 @@ export const getUserInfo = () => dispatch => {
       dispatch({ type: GET_USER_INFO_SUCCESS, payload: res.data });
     })
     .catch(error => {
-      console.log(error);
-      console.log(error.response)
-      console.log(error.message)
+      console.error(error);
       //need to figure out what message we're going to display.
-      // dispatch({ type: GET_USER_INFO_FAILURE , payload: error.response })
+      dispatch({ type: GET_USER_INFO_FAILURE , payload: error.response })
     });
 };
 
@@ -122,14 +115,13 @@ export const updateJoke = (id, joke) => dispatch => {
   })
   .then(res => {
     console.log(res);
-    dispatch({ type: UPDATE_JOKE_SUCCESS, payload: res.data })
+    dispatch({ type: UPDATE_JOKE_SUCCESS, payload: res.data, message: 'successfully updated joke'})
   })
   .catch(error => {
-    console.log(error);
-    console.log(error.response)
-    console.log(error.message)
+    console.error(error);
+
     //need to figure out what message we're going to display.
-    // dispatch({ type: UPDATE_JOKE_FAILURE , payload: error.response })
+    dispatch({ type: UPDATE_JOKE_FAILURE , payload: error.response })
   });
 }
 
@@ -140,18 +132,16 @@ export const DELETE_JOKE_FAILURE = 'DELETE_JOKE_FAILURE';
 export const deleteJoke = (id) => dispatch => {
   dispatch({ type: BEGIN_DELETE_JOKE })
 
-  axios
+  axiosWithAuth()
   .delete(`https://dad-jokes-2019.herokuapp.com/api/auth/jokes/${id}`)
   .then(res => {
     console.log(res);
     dispatch({ type: DELETE_JOKE_SUCCESS, payload: id })
   })
   .catch(error => {
-    console.log(error);
-    console.log(error.response)
-    console.log(error.message)
+    console.error(error);
     //need to figure out what message we're going to display.
-    // dispatch({ type: DELETE_JOKE_FAILURE , payload: error.response })
+    dispatch({ type: DELETE_JOKE_FAILURE , payload: error.response })
   });
 }
 
