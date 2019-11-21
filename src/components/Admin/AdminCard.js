@@ -13,11 +13,10 @@ const useStyles = makeStyles({
   },
   card:{
     backgroundColor: 'white',
-    padding: '50px',
     borderRadius: 25,
-    width: 500,
-    margin: 50,
-    height: 300,
+    width: '80%',
+    margin: '5%',
+    minHeight: 300,
     boxShadow: '0 15px 60px 0 #374785',
     display: 'flex',
     flexDirection: 'column',
@@ -25,12 +24,18 @@ const useStyles = makeStyles({
     justifyContent: 'center'
   },
   desc:{
-    width: 400,
+    width: 500,
     fontFamily: 'Roboto, sans-serif',
-    textAlign: 'center'
+    textAlign: 'center',
+    margin: 20,
+    resize: 'none'
   },
   punch:{
+    width: 500,
     fontFamily: 'Roboto, sans-serif',
+    textAlign: 'center',
+    margin: 20,
+    resize: 'none'
   },
   butt:{
     fontFamily: 'Roboto, sans-serif',
@@ -53,12 +58,19 @@ const useStyles = makeStyles({
     height: 40,
     width: 250,
     cursor: 'pointer'
-  }
+  },
+  form:{
+    width: '100%',
+    margin: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 })
 
 
 const AdminCard = ({joke: {id, punchline, jokes_description}, updateJoke, deleteJoke}) => {
-  console.log('card', id, punchline, jokes_description);
   const [joke, setJoke] = useState({description: jokes_description, punchline: punchline})
 
   const classes = useStyles();
@@ -75,32 +87,36 @@ const AdminCard = ({joke: {id, punchline, jokes_description}, updateJoke, delete
 
   const handleDelete = e => {
     e.preventDefault();
-    console.log('deleting')
     deleteJoke(id);
   }
 
   return (
     <div className={classes.cont}>
-      <form className={classes.card} onSubmit={handleSubmit}>
-        <input 
-        type='text'
-        name='description'
-        onChange={changeHandler}
-        placeholder='description'
-        value={joke.description}
-        className={classes.desc}
-        />
-        <input
-        type='text'
-        name='punchline'
-        onChange={changeHandler}
-        placeholder='punchline'
-        value={joke.punchline}
-        className={classes.punch}
-        />
-        <button className={classes.butt}>Save Joke</button>
-      </form>
-      <button className={classes.butt2} onClick={handleDelete}>Delete</button>
+      <div className={classes.card}>
+        <form className={classes.form} onSubmit={handleSubmit}>
+          <label>Description:
+          <textarea rows='3' cols='25'
+          type='text'
+          name='description'
+          onChange={changeHandler}
+          placeholder='description'
+          value={joke.description}
+          className={classes.desc}
+          /></label>
+          <label>Punchline:
+          <textarea rows='3' cols='25'
+          type='text'
+          name='punchline'
+          onChange={changeHandler}
+          placeholder='punchline'
+          value={joke.punchline}
+          className={classes.punch}
+          />
+          </label>
+          <button className={classes.butt}>Save Joke</button>
+        </form>
+        <button className={classes.butt2} onClick={handleDelete}>Delete</button>
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const NavDiv = styled.div`
   background-color: #374785;
-  height: 50px;
+  height: 40px;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -30,9 +30,6 @@ const NavBar = () => {
 
   return (
     <NavDiv>
-      <div>
-        <Link className={classes.a} to='/home'>Home</Link>
-      </div>
       {/* register and login should not appear on navbar when loggedin */}
       <div>
         <Link className={classes.a} to='/register'>Register</Link>

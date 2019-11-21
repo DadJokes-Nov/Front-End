@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getJokes } from '../../store/actions/userAction';
 import JokeCard from './JokeCard';
 import styled from "styled-components";
-import Axios from 'axios';
+// import Axios from 'axios';
 
 const Background = styled.div`
   background-color: #A8D0E6;
@@ -84,7 +84,7 @@ const Joke = ({getJokes, jokes}) => {
       </ButtonDiv>
     </Background>
 
-        //do not delete - array method to meet mvp
+    //do not delete - array method to meet mvp
 
     // {jokes.map(joke => {
     //   return (

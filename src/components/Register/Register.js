@@ -16,20 +16,20 @@ const useStyles = makeStyles({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
-        width: '100%'
+        height: '87vh',
+        width: '100%',
     },
     container:{
         backgroundColor: 'white',
         padding: '50px',
         borderRadius: 25,
         width: '100%',
-        margin: 50,
         minHeight: 400,
         maxHeight: 900,
         maxWidth: 1000,
         height: 'fit-content',
-        boxShadow: '0 15px 60px 0 #374785'
+        boxShadow: '0 15px 60px 0 #374785',
+        marginTop: '100px'
     },
     title:{
         fontWeight: 700,
@@ -256,7 +256,7 @@ const RegisterUserForm = ({ values, errors, touched }) => {
             </Form>
             <h1 className={classes.joke}>Because they don't like to commit.</h1>
             <p className={classes.reroute}>
-                If you don't have an account,{" "}
+                If you have an account,{" "}
                 <Link to="/login" className={classes.loginlink}>
                     {" "}click here to sign in
                 </Link>
