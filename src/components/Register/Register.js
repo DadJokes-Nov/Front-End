@@ -7,10 +7,6 @@ import * as Yup from "yup";
 import axios from 'axios';
 
 import { makeStyles } from "@material-ui/core/styles";
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Typography from '@material-ui/core/Typography';
 
 import "../Register/Register.scss";
 
@@ -21,33 +17,32 @@ const useStyles = makeStyles({
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
-        width: '100%'
+        width: '100%',
     },
     container:{
         backgroundColor: 'white',
-        padding: '50px',
+        padding: '25px',
         borderRadius: 25,
         width: '100%',
-        margin: 50,
         minHeight: 400,
+        maxHeight: 700,
         maxWidth: 1000,
-        height: 'fit-content',
-        boxShadow: '0 15px 60px 0 #374785'
+        boxShadow: '0 15px 60px 0 #374785',
+        marginTop: '100px'
     },
     title:{
         fontWeight: 700,
         color: '#24305E',
         fontFamily: 'Roboto, sans-serif',
         textAlign: 'center',
-        fontSize: "2.5rem"
+        fontSize: "1.5rem"
     },
     joke:{
         fontWeight: 700,
         color: '#24305E',
         fontFamily: 'Roboto, sans-serif',
         textAlign: 'center',
-        fontSize: '1.75rem',
-        margin: '3% auto'
+        fontSize: '1.3rem'
     },
     formcont:{
         display: 'flex',
@@ -91,15 +86,6 @@ const useStyles = makeStyles({
         fontFamily: 'Roboto, sans-serif',
         margin: 20
     },
-    card:{
-        minWidth: 400,
-        maxWidth: 400,
-        maxHeight: 400,
-        fontFamily: 'Roboto, sans-serif',
-        backgroundColor: "ghostwhite",
-        boxShadow: '0 3px 5px 2px #5F685C',
-        marginTop: 10
-    },
     buttcont:{
         display: 'flex',
         justifyContent: 'center'
@@ -127,13 +113,29 @@ const useStyles = makeStyles({
         fontFamily: 'Roboto, sans-serif'
     },
     error:{
-        color: 'red'
+        color: 'maroon'
     }
 })
 
 
-const RegisterUserForm = ({ values, errors, touched, status }) => {
+const RegisterUserForm = ({ values, errors, touched }) => {
+
     // const [users, setUsers] = useState([]); possibly unnecessary code
+
+    //PLEASE NO DELETE FOR MY MVP -LEXIE thank u v mucho
+
+    // useEffect(() => {
+    //     axiosWithAuth()
+    //     .get(`https://dad-jokes-2019.herokuapp.com/api/users/${props.userId}`)
+    //     .then(res => {
+    //         console.log(res)
+    //        setUsers(res.data)
+    //     })
+    //     .catch(err => {
+    //         console.log("There was an error, ", err)
+    //     })
+    // },[])
+
     const classes = useStyles();
 
     // useEffect(() => { possibly unnecessary code
@@ -143,8 +145,8 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
   return (
    <div className={classes.background}> 
         <div className={classes.container}>
-            <h1 className={classes.title}>Why don't bachelors like Git?</h1>
-            <h2 className={classes.joke}>Are you a self-proclaimed connoisseur of dad jokes? Then, you must join our blessed fellowship of like-minded dads who have the best dang kneeslappers.</h2>
+            <h1 className={classes.joke}>Why don't bachelors like Git?</h1>
+            <h2 className={classes.title}>Are you a self-proclaimed connoisseur of dad jokes? Then, you must join our blessed fellowship of like-minded dads who have the best dang kneeslappers.</h2>
             <Form className={classes.formcont}>
                 <div className={classes.formwrapper}>
                     <div>
@@ -245,14 +247,14 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                     <span className="checkmark" />
                     </label>
                     {/* <div className={classes.buttcont}> */}
-                        <button type="submit" className={classes.button}>Join the fatherhood.</button>
+                        {/* <button type="submit" className={classes.button}>Join the fatherhood.</button> */}
                     {/* </div> */}
                 </div>
                 <button type="submit" className={classes.button}>Join the fatherhood.</button>
             </Form>
             <h1 className={classes.joke}>Because they don't like to commit.</h1>
             <p className={classes.reroute}>
-                If you don't have an account,{" "}
+                If you have an account,{" "}
                 <Link to="/login" className={classes.loginlink}>
                     {" "}click here to sign in
                 </Link>
@@ -275,25 +277,24 @@ const FormikForm = withFormik({
       robotbox: robotbox || false
     };
   },
-
-  //one of these validations is broken/not showing properly.  my guess is the confirm.  
+ 
   validationSchema: Yup.object().shape({
-    // name: Yup.string()
-    //     .min(2, "Your name must be at least 2 characters long.")
-    //     .required("Name is required."),
-    // email: Yup.string()
-    //     .email("This is an invalid email.")
-    //     .required("Email is a required field."),
-    // username: Yup.string()
-    //     .min(5, "Your username must be at least 5 characters long.")
-    //     .required("Enter a username."),
-    // password: Yup.string()
-    //     .min(8, "Password must be 8 characters or longer.")
-    //     .required("Enter your password. Do not make me ask again."),
-    // confrim: Yup.string()
-    //     .oneOf([Yup.ref("password"), null], "Password must match!")
-    //     .required("Please enter the same password again!"),
-    // robotbox: Yup.bool().oneOf([true], "Error. Please check this box to let us know that you are an omniscient being - AI and the inferior human.")
+    name: Yup.string()
+        .min(2, "Your name must be at least 2 characters long.")
+        .required("Name is required."),
+    email: Yup.string()
+        .email("This is an invalid email.")
+        .required("Email is a required field."),
+    username: Yup.string()
+        .min(5, "Your username must be at least 5 characters long.")
+        .required("Enter a username."),
+    password: Yup.string()
+        .min(8, "Password must be 8 characters or longer.")
+        .required("Enter your password. Do not make me ask again."),
+    confirm: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Password must match!")
+        .required("Please enter the same password again!"),
+    robotbox: Yup.bool().oneOf([true], "Error. Please check this box to let us know that you are an omniscient being - AI and the inferior human.")
   }),
 
   handleSubmit(values, { setStatus, setSubmitting, props, resetForm }) {
@@ -303,7 +304,8 @@ const FormikForm = withFormik({
     axios.post('https://dad-jokes-2019.herokuapp.com/api/auth/register', {
         username: values.username,
         email: values.email,
-        password: values.password
+        password: values.password,
+
     })
       .then(res => {
         console.log(res);

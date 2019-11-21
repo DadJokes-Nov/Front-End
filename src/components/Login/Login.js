@@ -1,4 +1,3 @@
-
 import React from "react";
 import { connect } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
@@ -10,10 +9,6 @@ import "../Login/Login.scss";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { loginUser } from '../../store/actions/userAction';
-// import { isReferenced } from "@babel/types";
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     background:{
@@ -81,7 +76,7 @@ const useStyles = makeStyles({
         fontFamily: 'Roboto, sans-serif'
     },
     err:{
-        color: 'red',
+        color: 'maroon',
         fontSize: 18,
         fontFamily: 'Roboto, sans-serif'
     },
@@ -184,7 +179,7 @@ const LoginUserForm = ({ values, errors, touched, isAuthenticating, loggedIn, au
                         />
                     </div>
                     <div className={classes.buttcont}>
-                        <button className={classes.button}>Log back in to the fatherhood.</button>
+                        <button className={classes.button} type="submit">Log back in to the fatherhood.</button>
                     </div>
                     {authenticationError && (
                         <p className={classes.err}>{authenticationError.data}</p>
@@ -219,15 +214,15 @@ const FormikForm = withFormik({
           .min(5, "Your username must be at least 5 characters long.")
           .required("Enter a username, good sir."),
       password: Yup.string()
-          .min(8, "Password must be 8 characters or longer.")
-          .required("Enter the magic word, wizard.")
+        //   .min(8, "Password must be 8 characters or longer.")
+        //   .required("Enter the magic word, wizard.")
     }),
 
     handleSubmit(values, { props }) {
       props.loginUser({
         //   vvv this is bypassing it eventually will need to either add this or remove it from back end 
-          username: 'asdfasdfasdf',
-          email: values.username,
+        //   username: 'asdfasdfasdf',
+          username: values.username,
           password: values.password
         //   more comments
     })
