@@ -14,26 +14,28 @@ const JokeCardDiv = styled.div`
 
 `;
 
-const ButtonDiv = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin: auto;
-  margin-top: -50%;
-`;
+// button got moved so it can be inside card this code was moved not deleted!
 
-const Button = styled.button`
-  border-radius: 25px;
-  background-color: #f76C6C;
-  color: white;
-  font-weight: 500;
-  letter-spacing: 1px;
-  height: 40px;
-  width: 250px;
-  cursor: pointer;
-  font-family: 'Roboto', sans-serif;
-`;
+// const ButtonDiv = styled.div`
+//   position: relative;
+//   display: flex;
+//   justify-content: center;
+//   align-content: center;
+//   margin: auto;
+//   margin-top: -50%;
+// `;
+
+// const Button = styled.button`
+//   border-radius: 25px;
+//   background-color: #f76C6C;
+//   color: white;
+//   font-weight: 500;
+//   letter-spacing: 1px;
+//   height: 40px;
+//   width: 250px;
+//   cursor: pointer;
+//   font-family: 'Roboto', sans-serif;
+// `;
 
 const Joke = ({getJokes, jokes}) => {
   const [random, setRandom] = useState(0)
@@ -53,21 +55,21 @@ const Joke = ({getJokes, jokes}) => {
   // }, [])
 
   useEffect(() => {
+    // if we have no jokes we need to get jokes from server
     if (jokes.length === 0) {
-      console.log('getting jokes')
       getJokes();
     }
   }, [getJokes, jokes.length])
 
   useEffect(() => {
+    // this gets a random joke off first load
     const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
-    console.log(randomJoke);
     setRandom(randomJoke);
   }, [jokes.length])
 
   const newJoke = () => {
+    // this gets a random joke
     const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
-    console.log(randomJoke);
     setRandom(randomJoke);
   }
 
@@ -75,9 +77,9 @@ const Joke = ({getJokes, jokes}) => {
     <Background>
       <JokeCardDiv>
         {
+          // this test that we actually have jokes before we display a joke
           jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} newJoke={newJoke} />
         }
-        <Button onClick={newJoke}>New Joke</Button>
       </JokeCardDiv>
     </Background>
 
