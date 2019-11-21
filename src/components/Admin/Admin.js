@@ -27,7 +27,6 @@ const Admin = ({ getJokes, jokes }) => {
 
   return (
     <div className={classes.background}>
-      <h1>I HAVE THE POWER!</h1>
       <AdminAddJoke />
       {jokes.map(joke => {
         return (
