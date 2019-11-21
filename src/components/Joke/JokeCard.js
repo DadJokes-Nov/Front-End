@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-const JokeCard = ({joke: {punchline, jokes_description}}) => {
-  const [punch, setPunch] = useState(false);
+const JokeCard = ({joke: {punchline, jokes_description}, setPunch, punch}) => {
+  
 
   const showPunch = e => {
     e.preventDefault();

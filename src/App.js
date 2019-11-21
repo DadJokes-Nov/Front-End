@@ -10,6 +10,7 @@ import Joke from './components/Joke/Joke';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import NavBar from './components/NavBar/NavBar';
+import JokeGame from "./components/JokeGame/JokeGame";
 import { getUserInfo } from './store/actions/userAction';
 
 function App({getUserInfo}) {
@@ -31,7 +32,7 @@ function App({getUserInfo}) {
           <Admin />
         </PrivateRoute>
         <Route path='/home' component={Home} />
-        <Route path='/joke' render={ () => <Joke addNewJoke={addNewJoke} joke={jokeList} />} />
+        <Route path='/joke' render={ () => <Joke />} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route component={Home} />
