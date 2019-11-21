@@ -5,10 +5,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const NavDiv = styled.div`
   background-color: #374785;
-  height: 5vh;
+  height: 50px;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  z-index: 1000;
+  position: fixed;
 `;
 
 
