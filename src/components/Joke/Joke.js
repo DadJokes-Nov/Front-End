@@ -37,8 +37,28 @@ const JokeCardDiv = styled.div`
 //   font-family: 'Roboto', sans-serif;
 // `;
 
-const Joke = ({getJokes, jokes}) => {
-  const [random, setRandom] = useState(0)
+const Joke = ({ getJokes, jokes }) => {
+  const [random, setRandom] = useState(0);
+  const [punch, setPunch] = useState(false);
+
+  const [time, setTime] = useState(15);
+  const [active, setActive] = useState(true);
+  let interval = null;
+  useEffect(() => {
+    if (active && time > 0) {
+      interval = setTimeout(() => {
+        setTime(time - 1);
+      }, 1000);
+    } else if (punch) {
+      const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
+    setRandom(randomJoke);
+      setTime(15);
+      setPunch(false);
+    } else {
+      setPunch(true);
+      setTime(15);
+    }
+  }, [time, active]);
 
   //do not delete - need for mvp assessment - lexie
 
@@ -59,26 +79,28 @@ const Joke = ({getJokes, jokes}) => {
     if (jokes.length === 0) {
       getJokes();
     }
-  }, [getJokes, jokes.length])
+  }, [getJokes, jokes.length]);
 
   useEffect(() => {
     // this gets a random joke off first load
     const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
     setRandom(randomJoke);
-  }, [jokes.length])
+  }, [jokes.length]);
 
   const newJoke = () => {
     // this gets a random joke
     const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
     setRandom(randomJoke);
-  }
+  };
 
   return (
+
     <Background>
       <JokeCardDiv>
+        <p>{time}</p>
         {
           // this test that we actually have jokes before we display a joke
-          jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} newJoke={newJoke} jokesLength={jokes.length} />
+          jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} newJoke={newJoke} jokesLength={jokes.length} punch={punch} setPunch={setPunch} />
         }
       </JokeCardDiv>
     </Background>
@@ -102,7 +124,7 @@ const Joke = ({getJokes, jokes}) => {
 function mapStateToProps(state) {
   return {
     jokes: state.jokes
-  }
+  };
 }
 
 export default connect(mapStateToProps, { getJokes })(Joke);

@@ -46,8 +46,7 @@ const Button = styled.button`
   font-family: 'Roboto', sans-serif;
 `;
 
-const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLength}) => {
-  const [punch, setPunch] = useState(false);
+const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLength, setPunch, punch}) => {
 
   const showPunch = e => {
     e.preventDefault();
@@ -63,7 +62,7 @@ const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLengt
     <Container>
       <CardDiv>
         <CardInnerDiv>
-          <h3>Joke # {id}/{jokesLength +50}{/*jokesLength <-- this is how we should do it but we should assign each joke a new # because ID won't help with deletes.  So +50 makes us look like we have a lot too :D*/}</h3>
+          <h3>Joke # {id}/{jokesLength +50}</h3>{/*jokesLength <-- this is how we should do it but we should assign each joke a new # because ID won't help with deletes.  So +50 makes us look like we have a lot too :D*/}
           
           <JokeDesc>{jokes_description}</JokeDesc>
           {!punch && 
