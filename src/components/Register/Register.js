@@ -7,10 +7,6 @@ import * as Yup from "yup";
 import axios from 'axios';
 
 import { makeStyles } from "@material-ui/core/styles";
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Typography from '@material-ui/core/Typography';
 
 import "../Register/Register.scss";
 
@@ -30,6 +26,7 @@ const useStyles = makeStyles({
         width: '100%',
         margin: 50,
         minHeight: 400,
+        maxHeight: 900,
         maxWidth: 1000,
         height: 'fit-content',
         boxShadow: '0 15px 60px 0 #374785'
@@ -47,7 +44,7 @@ const useStyles = makeStyles({
         fontFamily: 'Roboto, sans-serif',
         textAlign: 'center',
         fontSize: '1.75rem',
-        margin: '3% auto'
+        margin: '2% auto'
     },
     formcont:{
         display: 'flex',
@@ -91,15 +88,6 @@ const useStyles = makeStyles({
         fontFamily: 'Roboto, sans-serif',
         margin: 20
     },
-    card:{
-        minWidth: 400,
-        maxWidth: 400,
-        maxHeight: 400,
-        fontFamily: 'Roboto, sans-serif',
-        backgroundColor: "ghostwhite",
-        boxShadow: '0 3px 5px 2px #5F685C',
-        marginTop: 10
-    },
     buttcont:{
         display: 'flex',
         justifyContent: 'center'
@@ -127,18 +115,14 @@ const useStyles = makeStyles({
         fontFamily: 'Roboto, sans-serif'
     },
     error:{
-        color: 'red'
+        color: 'maroon'
     }
 })
 
 
-const RegisterUserForm = ({ values, errors, touched, status }) => {
-    // const [users, setUsers] = useState([]); possibly unnecessary code
-    const classes = useStyles();
+const RegisterUserForm = ({ values, errors, touched }) => {
 
-    // useEffect(() => { possibly unnecessary code
-    // status && setUsers(users => [...users, status]);
-    // }, [status]);
+    const classes = useStyles();
 
   return (
    <div className={classes.background}> 
@@ -245,7 +229,7 @@ const RegisterUserForm = ({ values, errors, touched, status }) => {
                     <span className="checkmark" />
                     </label>
                     {/* <div className={classes.buttcont}> */}
-                        <button type="submit" className={classes.button}>Join the fatherhood.</button>
+                        {/* <button type="submit" className={classes.button}>Join the fatherhood.</button> */}
                     {/* </div> */}
                 </div>
                 <button type="submit" className={classes.button}>Join the fatherhood.</button>
@@ -275,25 +259,24 @@ const FormikForm = withFormik({
       robotbox: robotbox || false
     };
   },
-
-  //one of these validations is broken/not showing properly.  my guess is the confirm.  
+ 
   validationSchema: Yup.object().shape({
-    // name: Yup.string()
-    //     .min(2, "Your name must be at least 2 characters long.")
-    //     .required("Name is required."),
-    // email: Yup.string()
-    //     .email("This is an invalid email.")
-    //     .required("Email is a required field."),
-    // username: Yup.string()
-    //     .min(5, "Your username must be at least 5 characters long.")
-    //     .required("Enter a username."),
-    // password: Yup.string()
-    //     .min(8, "Password must be 8 characters or longer.")
-    //     .required("Enter your password. Do not make me ask again."),
-    // confrim: Yup.string()
-    //     .oneOf([Yup.ref("password"), null], "Password must match!")
-    //     .required("Please enter the same password again!"),
-    // robotbox: Yup.bool().oneOf([true], "Error. Please check this box to let us know that you are an omniscient being - AI and the inferior human.")
+    name: Yup.string()
+        .min(2, "Your name must be at least 2 characters long.")
+        .required("Name is required."),
+    email: Yup.string()
+        .email("This is an invalid email.")
+        .required("Email is a required field."),
+    username: Yup.string()
+        .min(5, "Your username must be at least 5 characters long.")
+        .required("Enter a username."),
+    password: Yup.string()
+        .min(8, "Password must be 8 characters or longer.")
+        .required("Enter your password. Do not make me ask again."),
+    confirm: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Password must match!")
+        .required("Please enter the same password again!"),
+    robotbox: Yup.bool().oneOf([true], "Error. Please check this box to let us know that you are an omniscient being - AI and the inferior human.")
   }),
 
   handleSubmit(values, { setStatus, setSubmitting, props, resetForm }) {
