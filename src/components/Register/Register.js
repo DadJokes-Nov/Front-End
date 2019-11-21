@@ -16,18 +16,17 @@ const useStyles = makeStyles({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '87vh',
+        height: '100vh',
         width: '100%',
     },
     container:{
         backgroundColor: 'white',
-        padding: '50px',
+        padding: '25px',
         borderRadius: 25,
         width: '100%',
         minHeight: 400,
-        maxHeight: 900,
+        maxHeight: 700,
         maxWidth: 1000,
-        height: 'fit-content',
         boxShadow: '0 15px 60px 0 #374785',
         marginTop: '100px'
     },
@@ -36,15 +35,14 @@ const useStyles = makeStyles({
         color: '#24305E',
         fontFamily: 'Roboto, sans-serif',
         textAlign: 'center',
-        fontSize: "2.5rem"
+        fontSize: "1.5rem"
     },
     joke:{
         fontWeight: 700,
         color: '#24305E',
         fontFamily: 'Roboto, sans-serif',
         textAlign: 'center',
-        fontSize: '1.75rem',
-        margin: '2% auto'
+        fontSize: '1.3rem'
     },
     formcont:{
         display: 'flex',
@@ -147,8 +145,8 @@ const RegisterUserForm = ({ values, errors, touched }) => {
   return (
    <div className={classes.background}> 
         <div className={classes.container}>
-            <h1 className={classes.title}>Why don't bachelors like Git?</h1>
-            <h2 className={classes.joke}>Are you a self-proclaimed connoisseur of dad jokes? Then, you must join our blessed fellowship of like-minded dads who have the best dang kneeslappers.</h2>
+            <h1 className={classes.joke}>Why don't bachelors like Git?</h1>
+            <h2 className={classes.title}>Are you a self-proclaimed connoisseur of dad jokes? Then, you must join our blessed fellowship of like-minded dads who have the best dang kneeslappers.</h2>
             <Form className={classes.formcont}>
                 <div className={classes.formwrapper}>
                     <div>
