@@ -65,8 +65,7 @@ const Joke = ({getJokes, jokes}) => {
     setRandom(randomJoke);
   }, [jokes.length])
 
-  const newJoke = e => {
-    e.preventDefault();
+  const newJoke = () => {
     const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
     console.log(randomJoke);
     setRandom(randomJoke);
@@ -76,12 +75,10 @@ const Joke = ({getJokes, jokes}) => {
     <Background>
       <JokeCardDiv>
         {
-          jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} />
+          jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} newJoke={newJoke} />
         }
-      </JokeCardDiv>
-      <ButtonDiv>
         <Button onClick={newJoke}>New Joke</Button>
-      </ButtonDiv>
+      </JokeCardDiv>
     </Background>
 
     //do not delete - array method to meet mvp

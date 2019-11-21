@@ -16,8 +16,8 @@ const CardDiv = styled.div`
 `;
 
 const CardInnerDiv = styled.div`
-  width: 500px;
-  height: 300px;
+  width: 80%;
+  height: 60vh;
   border: 1px solid black;
   border-radius: 25px;
   display: flex;
@@ -46,12 +46,18 @@ const Button = styled.button`
   font-family: 'Roboto', sans-serif;
 `;
 
-const JokeCard = ({joke: {punchline, jokes_description}}) => {
+const JokeCard = ({joke: {punchline, jokes_description}, newJoke}) => {
   const [punch, setPunch] = useState(false);
 
   const showPunch = e => {
     e.preventDefault();
     setPunch(true);
+  }
+
+  const next = e => {
+    e.preventDefault();
+    setPunch(false);
+    newJoke();
   }
   return (
     <Container>
@@ -59,9 +65,12 @@ const JokeCard = ({joke: {punchline, jokes_description}}) => {
         <CardInnerDiv>
           <JokeDesc>{jokes_description}</JokeDesc>
           {/* we will hide punchline til a button that we build in this component is created. */}
+          {!punch && 
           <Button onClick={showPunch}>Show Punchline</Button>
+          }
           {punch && <h2>{punchline}</h2>
           }
+          <Button onClick={next}>Next Joke</Button>
         </CardInnerDiv>
       </CardDiv>
     </Container>
