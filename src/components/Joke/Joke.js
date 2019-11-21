@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getJokes } from '../../store/actions/userAction';
 import JokeCard from './JokeCard';
 import styled from "styled-components";
+import Axios from 'axios';
 
 const Background = styled.div`
   background-color: #A8D0E6;
@@ -37,6 +38,20 @@ const Button = styled.button`
 const Joke = ({getJokes, jokes}) => {
   const [random, setRandom] = useState(0)
 
+  //do not delete - need for mvp assessment - lexie
+
+  // const [jokes, setJokes] = useState([]);
+
+  // useEffect(() => {
+  //   Axios.get('https://dad-jokes-2019.herokuapp.com/api/jokes')
+  //   .then(res => {
+  //     console.log(res);
+  //     setJokes(res.data);
+  //   }).catch(err => {
+  //     console.log("There was an error.", err);
+  //   })
+  // }, [])
+
   useEffect(() => {
     if (jokes.length === 0) {
       console.log('getting jokes')
@@ -68,6 +83,20 @@ const Joke = ({getJokes, jokes}) => {
         <Button onClick={newJoke}>New Joke</Button>
       </ButtonDiv>
     </Background>
+
+        //do not delete - array method to meet mvp
+
+    // {jokes.map(joke => {
+    //   return (
+    //     <JokeCard 
+    //       key={joke.id} 
+    //       id={joke.id} 
+    //       jokes_description={joke.jokes_description} 
+    //       punchline={joke.punchline} 
+    //     />
+    //   )
+    // })}
+
   );
 };
 
