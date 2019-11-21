@@ -53,6 +53,16 @@ const NavBar = ({ loggedIn, logoutUser }) => {
 
   return (
     <NavDiv>
+
+      <div>
+        <a href='https://dadjokes-nov.github.io/Marketing-page/index.html' className={classes.a}>Home</a>
+      </div>
+
+      <div>
+        <Link className={classes.a} to='/joke'>Joke</Link>
+      </div>
+
+      
       {/* register and login should not appear on navbar when loggedin */}
       {!loggedIn && (
         <>
@@ -64,10 +74,7 @@ const NavBar = ({ loggedIn, logoutUser }) => {
       </div>
       </>
       )}
-      <div>
-        <Link className={classes.a} to='/joke'>Joke</Link>
-      </div>
-      
+
       {loggedIn && (
         <>
         <div>

@@ -97,6 +97,7 @@ const AdminAddJoke = ({addJoke}) => {
     <div className={classes.cont}>
       <div className={classes.card}>
         <form className={classes.form} onSubmit={handleSubmit}>
+          <h1>Add Jokes!</h1>
           <textarea rows='3' cols='25'
           type='text'
           name='description'
