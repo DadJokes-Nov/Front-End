@@ -46,8 +46,9 @@ const Button = styled.button`
   font-family: 'Roboto', sans-serif;
 `;
 
-const JokeCard = ({joke: {punchline, jokes_description}, newJoke}) => {
+const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLength}) => {
   const [punch, setPunch] = useState(false);
+  console.log(jokesLength);
 
   const showPunch = e => {
     e.preventDefault();
@@ -63,9 +64,11 @@ const JokeCard = ({joke: {punchline, jokes_description}, newJoke}) => {
     <Container>
       <CardDiv>
         <CardInnerDiv>
+          <h3>Joke # {id}/100{/*jokesLength <-- this is how we should do it but we should assign each joke a new # because ID won't help with deletes.*/}</h3>
+          
           <JokeDesc>{jokes_description}</JokeDesc>
-
           {!punch && 
+          // button will not be visible when punchline is being shown
           <Button onClick={showPunch}>Git Joke <span role='img' aria-label='laugh'>🤣🤣</span></Button>
           }
           {/* button click shows puncline and is always set back to false on newJoke! */}
