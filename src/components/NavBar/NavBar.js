@@ -16,6 +16,15 @@ const NavDiv = styled.div`
   position: fixed;
 `;
 
+const LogOut = styled.div`
+  background-color: #374785;
+  color: white;
+  fontFamily: Roboto, sans-serif;
+  fontSize: 20;
+  textDecoration: none;
+  cursor: pointer;
+`
+
 
 const useStyles = makeStyles({
   a:{
@@ -58,13 +67,10 @@ const NavBar = ({ loggedIn, logoutUser }) => {
         <Link className={classes.a} to='/admin'>Admin</Link>
       </div>
 
-       {/* <Avatar src={user.img_url} className={classes.avatar} /> */}
-       <button
-        //  className={navbar.logout}
-         onClick={logout}
-       >
-         Logout
-       </button>
+       {/* <Avatar src={user.img_url} className={classes.avatar} /> for when we look into using a image  */}
+       <LogOut onClick={logout}>
+         Logout <span role='img' aria-label='cry'>😭</span>
+       </LogOut>
       </>
       )}
       

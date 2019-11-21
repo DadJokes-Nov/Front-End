@@ -66,7 +66,7 @@ const JokeCard = ({joke: {punchline, jokes_description}, newJoke}) => {
           <JokeDesc>{jokes_description}</JokeDesc>
 
           {!punch && 
-          <Button onClick={showPunch}>Git Joke 🤣🤣</Button>
+          <Button onClick={showPunch}>Git Joke <span role='img' aria-label='laugh'>🤣🤣</span></Button>
           }
           {/* button click shows puncline and is always set back to false on newJoke! */}
           {punch && <h2>{punchline}</h2>
