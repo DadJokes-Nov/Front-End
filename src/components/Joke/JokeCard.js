@@ -60,7 +60,7 @@ const JokeCard = ({joke: {punchline, jokes_description}}) => {
           <JokeDesc>{jokes_description}</JokeDesc>
           {/* we will hide punchline til a button that we build in this component is created. */}
           <Button onClick={showPunch}>Show Punchline</Button>
-          {punch && <h1>{punchline}</h1>
+          {punch && <h2>{punchline}</h2>
           }
         </CardInnerDiv>
       </CardDiv>
