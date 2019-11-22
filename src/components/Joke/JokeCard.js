@@ -46,11 +46,12 @@ const Button = styled.button`
   font-family: 'Roboto', sans-serif;
 `;
 
-const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLength, setPunch, punch, time}) => {
+const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLength, setPunch, punch, time, active, setActive}) => {
 
   const showPunch = e => {
     e.preventDefault();
     setPunch(true);
+    setActive(false);
   }
 
   const next = e => {
@@ -58,11 +59,18 @@ const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLengt
     setPunch(false);
     newJoke();
   }
+
+  const handleCheck = e => {
+    e.preventDefault();
+    setActive(!active);
+  }
+
+
   return (
     <Container>
       <CardDiv>
         <CardInnerDiv>
-          <p>{time}</p>
+          {active && <p>{time}</p>}
 
           <h3>Joke # {id}/{jokesLength +50}</h3>{/*jokesLength <-- this is how we should do it but we should assign each joke a new # because ID won't help with deletes.  So +50 makes us look like we have a lot too :D*/}
           
@@ -75,6 +83,11 @@ const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLengt
           {punch && <h2>{punchline}</h2>
           }
           <Button onClick={next}>Next Joke</Button>
+          <label>Auto Scroll
+            <input type="checkbox" 
+              checked={active}
+              onClick={handleCheck}
+          /></label>
         </CardInnerDiv>
       </CardDiv>
     </Container>

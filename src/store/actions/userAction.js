@@ -17,7 +17,6 @@ export const LOGIN_FAILURE = 'LOGIN FAILURE';
 
 export const loginUser = credentials => dispatch => {
   dispatch({ type: START_LOGIN });
-  console.log(credentials);
 
   //need to make sure the URL is correct.
   axios
@@ -31,7 +30,7 @@ export const loginUser = credentials => dispatch => {
     })
     .catch(error => {
       console.error(error);
-      dispatch({ type: LOGIN_FAILURE, payload: error.response })
+      dispatch({ type: LOGIN_FAILURE, payload: error.response.data.message })
     });
 }
 
@@ -53,7 +52,7 @@ export const getJokes = () => dispatch => {
       // console.log(error.response)
       // console.log(error.message)
       //need to figure out what message we're going to display.
-      dispatch({ type: GET_JOKE_FAILURE , payload: error.response })
+      dispatch({ type: GET_JOKE_FAILURE , payload: error.response.data.message })
     });
 }
 
@@ -76,7 +75,7 @@ export const addJoke = joke => dispatch => {
     .catch(error => {
       console.error(error);
       //need to figure out what message we're going to display.
-      dispatch({ type: ADD_JOKE_FAILURE , payload: error.response })
+      dispatch({ type: ADD_JOKE_FAILURE , payload: error.response.data.message })
     });
 }
 
@@ -97,7 +96,7 @@ export const getUserInfo = () => dispatch => {
     .catch(error => {
       console.error(error);
       //need to figure out what message we're going to display.
-      dispatch({ type: GET_USER_INFO_FAILURE , payload: error.response })
+      dispatch({ type: GET_USER_INFO_FAILURE , payload: error.response.data.message })
     });
 };
 
@@ -121,7 +120,7 @@ export const updateJoke = (id, joke) => dispatch => {
     console.error(error);
 
     //need to figure out what message we're going to display.
-    dispatch({ type: UPDATE_JOKE_FAILURE , payload: error.response })
+    dispatch({ type: UPDATE_JOKE_FAILURE , payload: error.response.data.message })
   });
 }
 
@@ -141,7 +140,7 @@ export const deleteJoke = (id) => dispatch => {
   .catch(error => {
     console.error(error);
     //need to figure out what message we're going to display.
-    dispatch({ type: DELETE_JOKE_FAILURE , payload: error.response })
+    dispatch({ type: DELETE_JOKE_FAILURE , payload: error.response.data.message })
   });
 }
 

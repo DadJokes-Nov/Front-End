@@ -44,19 +44,23 @@ const Joke = ({ getJokes, jokes }) => {
   const [time, setTime] = useState(15);
   const [active, setActive] = useState(true);
   let interval = null;
+  
   useEffect(() => {
-    if (active && time > 0) {
-      interval = setTimeout(() => {
-        setTime(time - 1);
-      }, 1000);
-    } else if (punch) {
-      const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
-    setRandom(randomJoke);
-      setTime(15);
-      setPunch(false);
-    } else {
-      setPunch(true);
-      setTime(15);
+    if (active) {
+      if (time > 0) {
+        interval = setTimeout(() => {
+          setTime(time - 1);
+        }, 1000);
+      } else if (punch) {
+        const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
+        console.log('else if changing it')
+        setRandom(randomJoke);
+        setTime(15);
+        setPunch(false);
+      } else {
+        setPunch(true);
+        setTime(15);
+      }
     }
   }, [time, active]);
 
@@ -90,6 +94,7 @@ const Joke = ({ getJokes, jokes }) => {
   const newJoke = () => {
     // this gets a random joke
     const randomJoke = Math.floor(Math.random() * Math.floor(jokes.length));
+    setActive(false);
     setRandom(randomJoke);
   };
 
@@ -99,7 +104,7 @@ const Joke = ({ getJokes, jokes }) => {
       <JokeCardDiv>
         {
           // this test that we actually have jokes before we display a joke
-          jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} newJoke={newJoke} jokesLength={jokes.length} punch={punch} setPunch={setPunch} time={time} />
+          jokes[random] && <JokeCard key={jokes[random].id} joke={jokes[random]} newJoke={newJoke} jokesLength={jokes.length} punch={punch} setPunch={setPunch} time={time} active={active} setActive={setActive} />
         }
       </JokeCardDiv>
     </Background>
