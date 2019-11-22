@@ -24,7 +24,6 @@ export const loginUser = credentials => dispatch => {
     .then(res => {
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('id', res.data.id)
-      console.log(res);
       // Need to fix the payload.  Once backend is updated we should get back username, email, image url, and maybe userID
       return dispatch({ type: LOGIN_SUCCESS, payload: res })
     })
@@ -44,7 +43,6 @@ export const getJokes = () => dispatch => {
   axios
     .get('https://dad-jokes-2019.herokuapp.com/api/jokes')
     .then(res => {
-      console.log(res);
       return dispatch({ type: GET_JOKE_SUCCESS , payload: res.data })
     })
     .catch(error => {
@@ -69,7 +67,6 @@ export const addJoke = joke => dispatch => {
       'jokes_description': joke.description
     })
     .then(res => {
-      console.log(res);
       return dispatch({ type: ADD_JOKE_SUCCESS, payload: res.data })
     })
     .catch(error => {
@@ -90,7 +87,6 @@ export const getUserInfo = () => dispatch => {
   axiosWithAuth()
     .get(`https://dad-jokes-2019.herokuapp.com/api/auth/${id}`)
     .then(res => {
-      console.log(res);
       dispatch({ type: GET_USER_INFO_SUCCESS, payload: res.data });
     })
     .catch(error => {
@@ -113,7 +109,6 @@ export const updateJoke = (id, joke) => dispatch => {
     'jokes_description': joke.description
   })
   .then(res => {
-    console.log(res);
     dispatch({ type: UPDATE_JOKE_SUCCESS, payload: res.data, message: 'successfully updated joke'})
   })
   .catch(error => {
@@ -134,7 +129,6 @@ export const deleteJoke = (id) => dispatch => {
   axiosWithAuth()
   .delete(`https://dad-jokes-2019.herokuapp.com/api/auth/jokes/${id}`)
   .then(res => {
-    console.log(res);
     dispatch({ type: DELETE_JOKE_SUCCESS, payload: id })
   })
   .catch(error => {

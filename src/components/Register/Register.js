@@ -318,4 +318,10 @@ const FormikForm = withFormik({
   }
 })(RegisterUserForm);
 
-export default FormikForm;
+const mapStateToProps = state => {
+    return {
+
+    };
+  };
+
+export default connect( mapStateToProps, {} )(FormikForm);

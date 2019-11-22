@@ -43,9 +43,9 @@ const Joke = ({ getJokes, jokes }) => {
 
   const [time, setTime] = useState(15);
   const [active, setActive] = useState(true);
-  let interval = null;
   
   useEffect(() => {
+    let interval = null;
     if (active) {
       if (time > 0) {
         interval = setTimeout(() => {
@@ -62,7 +62,7 @@ const Joke = ({ getJokes, jokes }) => {
         setTime(15);
       }
     }
-  }, [time, active]);
+  }, [time, active, jokes.length, punch]);
 
   //do not delete - need for mvp assessment - lexie
 

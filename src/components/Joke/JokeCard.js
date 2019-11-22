@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -46,6 +46,11 @@ const Button = styled.button`
   font-family: 'Roboto', sans-serif;
 `;
 
+const Paragraph = styled.p`
+  font-size: 2rem;
+  font-weight: 700;
+`
+
 const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLength, setPunch, punch, time, active, setActive}) => {
 
   const showPunch = e => {
@@ -70,7 +75,7 @@ const JokeCard = ({joke: {id, punchline, jokes_description}, newJoke, jokesLengt
     <Container>
       <CardDiv>
         <CardInnerDiv>
-          {active && <p>{time}</p>}
+          {active && <Paragraph>{punch ? 'Next joke' : 'Punchline'} in {time}</Paragraph>}
 
           <h3>Joke # {id}/{jokesLength +50}</h3>{/*jokesLength <-- this is how we should do it but we should assign each joke a new # because ID won't help with deletes.  So +50 makes us look like we have a lot too :D*/}
           
