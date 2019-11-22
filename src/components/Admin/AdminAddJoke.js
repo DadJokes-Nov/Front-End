@@ -76,8 +76,7 @@ const initialState = {
 
 const AdminAddJoke = ({addJoke, jokeSuccess}) => {
   const [joke, setJoke] = useState(initialState);
-  console.log(jokeSuccess);
-
+  
   const classes = useStyles();
 
   const changeHandler = e => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux';
@@ -38,10 +38,12 @@ const useStyles = makeStyles({
 const NavBar = ({ loggedIn, logoutUser }) => {
 
   const classes= useStyles();
+  const history = useHistory();
 
   const logout = e => {
     e.preventDefault();
     logoutUser();
+    history.push('/login');
   }
   
   //DO NOT REMOVE - onclick needed for MVP for Lexie
