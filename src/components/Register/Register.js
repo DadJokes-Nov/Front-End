@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { connect } from 'react-redux';
 // import { axiosInstance } from "../../utils/axiosInstance";
 import axios from 'axios';
 
@@ -317,4 +318,10 @@ const FormikForm = withFormik({
   }
 })(RegisterUserForm);
 
-export default FormikForm;
+const mapStateToProps = state => {
+    return {
+
+    };
+  };
+
+export default connect( mapStateToProps, {} )(FormikForm);

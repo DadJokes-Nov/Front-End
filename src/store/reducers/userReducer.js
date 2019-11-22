@@ -38,7 +38,8 @@ const initState = {
 
   isFetchingJokes: false,
   jokesError: '',
-  userInfoError: ''
+  userInfoError: '',
+  jokeSuccess: ''
 }
 
 export const userReducer = (state = initState, action) => {
@@ -100,6 +101,7 @@ export const userReducer = (state = initState, action) => {
       return {
         ...state,
         isFetchingJokes: false,
+        jokeSuccess: 'joke was added',
         jokes: [...state.jokes, action.payload]
       }
 
